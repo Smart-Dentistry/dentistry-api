@@ -1,16 +1,14 @@
-FROM python:alpine
+FROM python:slim
 
 # Keeps Python from generating .pyc files in the container
 ENV PYTHONDONTWRITEBYTECODE 1
 # Turns off buffering for easier container logging
 ENV PYTHONUNBUFFERED 1
 
-# Install dev dependencies
-RUN apk update \
-    && apk add curl postgresql-dev gcc python3-dev musl-dev
-
-# Install poetry
+# Install and setup poetry
 RUN pip install -U pip \
+    && apt-get update \
+    && apt install -y curl netcat \
     && curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python
 ENV PATH="${PATH}:/root/.poetry/bin"
 
