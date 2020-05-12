@@ -7,7 +7,7 @@ ENV PYTHONUNBUFFERED 1
 
 # Install dev dependencies
 RUN apk update \
-    && apk add curl postgresql-dev gcc python3-dev musl-dev openssl-dev libffi-dev
+    && apk add curl postgresql-dev gcc python3-dev musl-dev
 
 # Install poetry
 RUN pip install -U pip \
