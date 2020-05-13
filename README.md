@@ -37,6 +37,16 @@ docker-compose up
 
 You are all set 🎉. Navigate to http://localhost:8000/ to see Django's success page.
 
+## pre-commit and pre-push
+
+[pre-commit][] is used in order to run some hooks and automate some tasks such as formatting files before committing and running tests before commiting and pushing. Make sure you have [installed pre-commit][install-precommit].
+
+In order to take advantage of the hooks defined at [`.pre-commit-config.yaml`][pre-commit-file], run the following command:
+
+```bash
+pre-commit install && pre-commit install -t pre-push
+```
+
 ## Docker commands
 
 This is a compilation of some useful Docker commands.
