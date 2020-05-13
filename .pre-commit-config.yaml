@@ -12,3 +12,13 @@ repos:
     - id: mypy
       args: ["--ignore-missing-imports", "--follow-imports=normal"]
       exclude: ./*/migrations/
+-   repo: local
+    hooks:
+    -   id: test
+        name: run tests
+        entry: docker-compose exec -T app pytest
+        language: system
+        types: [python]
+        always_run: true
+        pass_filenames: false
+        stages: [push]
