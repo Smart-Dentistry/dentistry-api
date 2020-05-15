@@ -2,6 +2,8 @@ version: '3.8'
 
 services:
   app:
+    container_name: dentistry_app
+    image: dentistry_app:latest
     build: .
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
@@ -13,6 +15,7 @@ services:
     depends_on:
       - db
   db:
+    container_name: dentistry_db
     image: postgres:alpine
     volumes:
       - postgres_data:/var/lib/postgresql/data/
