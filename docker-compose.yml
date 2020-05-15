@@ -3,6 +3,7 @@ version: '3.8'
 services:
   app:
     container_name: dentistry_app
+    image: dentistry_app:latest
     build: .
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
