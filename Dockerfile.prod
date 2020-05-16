@@ -16,4 +16,9 @@ WORKDIR /usr/src/app
 COPY . .
 RUN poetry config virtualenvs.create false \
   && poetry install --no-interaction --no-ansi
+
+# add and run as non-root user
+RUN adduser -D user
+USER user
+
 CMD gunicorn dentistry.wsgi:application
