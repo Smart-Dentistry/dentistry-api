@@ -133,4 +133,7 @@ STATIC_URL = '/static/'
 AUTH_USER_MODEL = "users.User"
 
 # corsheaders
-CORS_ORIGIN_WHITELIST = ["http://localhost:3000"]
+CORS_ORIGIN_WHITELIST = [
+    "http://localhost:3000",
+    "https://dentistry-web.herokuapp.com"
+]
