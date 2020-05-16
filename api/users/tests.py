@@ -2,7 +2,7 @@ from django.contrib.auth import get_user_model
 
 import pytest
 
-from api.users.serializers import UserSerializer
+from .serializers import UserSerializer
 
 User = get_user_model()
 
