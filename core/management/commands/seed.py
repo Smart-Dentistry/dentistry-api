@@ -4,8 +4,8 @@ from django.contrib.auth import get_user_model
 User = get_user_model()
 PASSWORD = 'pi3.1415'
 DEVS = [
-    {'username': 'm', 'password': PASSWORD},
-    {'username': 'sika', 'password': PASSWORD}
+    {'username': 'm', 'password': PASSWORD, 'email': 'm@mathsistor.com'},
+    {'username': 'sika', 'password': PASSWORD, 'email': 'sikabarca@gmail.com'}
 ]
 
 
