@@ -111,6 +111,17 @@ version = "2.2.9"
 six = ">=1.2"
 
 [[package]]
+category = "main"
+description = "Web APIs for Django, made easy."
+name = "djangorestframework"
+optional = false
+python-versions = ">=3.5"
+version = "3.11.0"
+
+[package.dependencies]
+django = ">=1.11"
+
+[[package]]
 category = "dev"
 description = "IPython: Productive Interactive Computing"
 name = "ipython"
@@ -365,7 +376,7 @@ python-versions = "*"
 version = "0.1.9"
 
 [metadata]
-content-hash = "906e8c89f003d2b08fd1ff420321f14a13b5dd8b7f8c917668131a1fab4caec8"
+content-hash = "779d4b0ee21ef537e04d90b2829bc3385d15a562a9465aabbb448c1e4bdd51c5"
 python-versions = "^3.8"
 
 [metadata.files]
@@ -412,6 +423,10 @@ django-environ = [
 django-extensions = [
     {file = "django-extensions-2.2.9.tar.gz", hash = "sha256:2f81b618ba4d1b0e58603e25012e5c74f88a4b706e0022a3b21f24f0322a6ce6"},
     {file = "django_extensions-2.2.9-py2.py3-none-any.whl", hash = "sha256:b19182d101a441fe001c5753553a901e2ef3ff60e8fbbe38881eb4a61fdd17c4"},
+]
+djangorestframework = [
+    {file = "djangorestframework-3.11.0-py3-none-any.whl", hash = "sha256:05809fc66e1c997fd9a32ea5730d9f4ba28b109b9da71fccfa5ff241201fd0a4"},
+    {file = "djangorestframework-3.11.0.tar.gz", hash = "sha256:e782087823c47a26826ee5b6fa0c542968219263fb3976ec3c31edab23a4001f"},
 ]
 ipython = [
     {file = "ipython-7.14.0-py3-none-any.whl", hash = "sha256:5b241b84bbf0eb085d43ae9d46adf38a13b45929ca7774a740990c2c242534bb"},
