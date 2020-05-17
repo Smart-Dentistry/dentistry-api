@@ -17,6 +17,6 @@ COPY . .
 RUN poetry config virtualenvs.create false \
   && poetry install --no-dev --no-interaction --no-ansi
 
-RUN mkdir dentistry/staticfiles
+RUN python manage.py collectstatic --noinput
 
 CMD gunicorn dentistry.wsgi:application

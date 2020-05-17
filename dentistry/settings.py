@@ -16,7 +16,9 @@ import dj_database_url
 import environ
 
 env = environ.Env(
-    DEBUG=(bool, False)
+    DEBUG=(bool, False),
+    SECRET_KEY=(str, '7!#06r6*cj#uudggby6g2$8ttnez4)fte!ju0bkh1+((ph$9b!'),
+    ALLOWED_HOSTS=(list, ['*'])
 )
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)

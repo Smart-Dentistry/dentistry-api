@@ -6,4 +6,4 @@ run:
 release:
   image: web
   command:
-    - django-admin collectstatic --noinput --clear && django-admin migrate --noinput
+    -  django-admin migrate --noinput
