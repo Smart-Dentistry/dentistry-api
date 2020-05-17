@@ -47,7 +47,7 @@ ALLOWED_HOSTS = env.list('ALLOWED_HOSTS')
 INSTALLED_APPS = [
     'core.apps.CoreConfig',
     'users.apps.UsersConfig',
-    'medicalrecords.apps.MedicalrecordsConfig',
+    'medical_records.apps.MedicalRecordsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
