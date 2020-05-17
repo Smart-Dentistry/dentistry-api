@@ -15,6 +15,8 @@ ENV PATH="${PATH}:/root/.poetry/bin"
 WORKDIR /usr/src/app
 COPY . .
 RUN poetry config virtualenvs.create false \
-  && poetry install --no-interaction --no-ansi
+  && poetry install --no-dev --no-interaction --no-ansi
+
+RUN python manage.py collectstatic --noinput
 
 CMD gunicorn dentistry.wsgi:application
