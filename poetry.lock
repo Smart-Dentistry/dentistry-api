@@ -174,6 +174,10 @@ version = "4.0.0"
 Django = ">=1.11.3"
 babel = "*"
 
+[package.dependencies.phonenumberslite]
+optional = true
+version = ">=7.0.2"
+
 [package.extras]
 phonenumbers = ["phonenumbers (>=7.0.2)"]
 phonenumberslite = ["phonenumberslite (>=7.0.2)"]
@@ -338,6 +342,14 @@ version = "4.8.0"
 
 [package.dependencies]
 ptyprocess = ">=0.5"
+
+[[package]]
+category = "main"
+description = "Python version of Google's common library for parsing, formatting, storing and validating international phone numbers."
+name = "phonenumberslite"
+optional = false
+python-versions = "*"
+version = "8.12.3"
 
 [[package]]
 category = "dev"
@@ -543,7 +555,7 @@ version = "5.0.1"
 brotli = ["brotli"]
 
 [metadata]
-content-hash = "7bd655d4fc93e306e1506ab7473d78fe5c4ddf6b938dc08dc931c0899f9f7685"
+content-hash = "74a8a02fc7e4a5a0c6515a6567c3355cac53ea0c1ae0fc30bce2bc29debd8cb3"
 python-versions = "^3.8"
 
 [metadata.files]
@@ -659,6 +671,10 @@ parso = [
 pexpect = [
     {file = "pexpect-4.8.0-py2.py3-none-any.whl", hash = "sha256:0b48a55dcb3c05f3329815901ea4fc1537514d6ba867a152b581d69ae3710937"},
     {file = "pexpect-4.8.0.tar.gz", hash = "sha256:fc65a43959d153d0114afe13997d439c22823a27cefceb5ff35c2178c6784c0c"},
+]
+phonenumberslite = [
+    {file = "phonenumberslite-8.12.3-py2.py3-none-any.whl", hash = "sha256:c3c632f68dc71f6b5a00d3cbd5729286b62e3d90d10fea3ffdd87c9ce066de88"},
+    {file = "phonenumberslite-8.12.3.tar.gz", hash = "sha256:7b1800f581289711e24d8aa80f09a71ef7591a92e725b73d9cc58a4f7757de2d"},
 ]
 pickleshare = [
     {file = "pickleshare-0.7.5-py2.py3-none-any.whl", hash = "sha256:9649af414d74d4df115d5d718f82acb59c9d418196b7b4290ed47a12ce62df56"},
