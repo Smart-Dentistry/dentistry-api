@@ -42,6 +42,17 @@ docs = ["sphinx", "zope.interface"]
 tests = ["coverage", "hypothesis", "pympler", "pytest (>=4.3.0)", "six", "zope.interface"]
 
 [[package]]
+category = "main"
+description = "Internationalization utilities"
+name = "babel"
+optional = false
+python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
+version = "2.8.0"
+
+[package.dependencies]
+pytz = ">=2015.7"
+
+[[package]]
 category = "dev"
 description = "Specifications for callback functions passed in to an API"
 name = "backcall"
@@ -150,6 +161,26 @@ version = "2.2.9"
 
 [package.dependencies]
 six = ">=1.2"
+
+[[package]]
+category = "main"
+description = "An international phone number field for django models."
+name = "django-phonenumber-field"
+optional = false
+python-versions = ">=3.5"
+version = "4.0.0"
+
+[package.dependencies]
+Django = ">=1.11.3"
+babel = "*"
+
+[package.dependencies.phonenumberslite]
+optional = true
+version = ">=7.0.2"
+
+[package.extras]
+phonenumbers = ["phonenumbers (>=7.0.2)"]
+phonenumberslite = ["phonenumberslite (>=7.0.2)"]
 
 [[package]]
 category = "main"
@@ -311,6 +342,14 @@ version = "4.8.0"
 
 [package.dependencies]
 ptyprocess = ">=0.5"
+
+[[package]]
+category = "main"
+description = "Python version of Google's common library for parsing, formatting, storing and validating international phone numbers."
+name = "phonenumberslite"
+optional = false
+python-versions = "*"
+version = "8.12.3"
 
 [[package]]
 category = "dev"
@@ -516,7 +555,7 @@ version = "5.0.1"
 brotli = ["brotli"]
 
 [metadata]
-content-hash = "7e21564cbecc5aae7a4a517457ef09ca733151cd7ab8d1d5b5d038a167b177fd"
+content-hash = "74a8a02fc7e4a5a0c6515a6567c3355cac53ea0c1ae0fc30bce2bc29debd8cb3"
 python-versions = "^3.8"
 
 [metadata.files]
@@ -535,6 +574,10 @@ atomicwrites = [
 attrs = [
     {file = "attrs-19.3.0-py2.py3-none-any.whl", hash = "sha256:08a96c641c3a74e44eb59afb61a24f2cb9f4d7188748e76ba4bb5edfa3cb7d1c"},
     {file = "attrs-19.3.0.tar.gz", hash = "sha256:f7b7ce16570fe9965acd6d30101a28f62fb4a7f9e926b3bbc9b61f8b04247e72"},
+]
+babel = [
+    {file = "Babel-2.8.0-py2.py3-none-any.whl", hash = "sha256:d670ea0b10f8b723672d3a6abeb87b565b244da220d76b4dba1b66269ec152d4"},
+    {file = "Babel-2.8.0.tar.gz", hash = "sha256:1aac2ae2d0d8ea368fa90906567f5c08463d98ade155c0c4bfedd6a0f7160e38"},
 ]
 backcall = [
     {file = "backcall-0.1.0.tar.gz", hash = "sha256:38ecd85be2c1e78f77fd91700c76e14667dc21e2713b63876c0eb901196e01e4"},
@@ -575,6 +618,10 @@ django-environ = [
 django-extensions = [
     {file = "django-extensions-2.2.9.tar.gz", hash = "sha256:2f81b618ba4d1b0e58603e25012e5c74f88a4b706e0022a3b21f24f0322a6ce6"},
     {file = "django_extensions-2.2.9-py2.py3-none-any.whl", hash = "sha256:b19182d101a441fe001c5753553a901e2ef3ff60e8fbbe38881eb4a61fdd17c4"},
+]
+django-phonenumber-field = [
+    {file = "django-phonenumber-field-4.0.0.tar.gz", hash = "sha256:d4580cc3352f4433962825f9927e6669852c1b40ec484fcb5a74064dabc1201a"},
+    {file = "django_phonenumber_field-4.0.0-py3-none-any.whl", hash = "sha256:2ca3bb0ada0ebc164bd903a981a34f1202a4294006e520b0da961bd7ce9f20a4"},
 ]
 django-storages = [
     {file = "django-storages-1.9.1.tar.gz", hash = "sha256:a59e9923cbce7068792f75344ed7727021ee4ac20f227cf17297d0d03d141e91"},
@@ -624,6 +671,10 @@ parso = [
 pexpect = [
     {file = "pexpect-4.8.0-py2.py3-none-any.whl", hash = "sha256:0b48a55dcb3c05f3329815901ea4fc1537514d6ba867a152b581d69ae3710937"},
     {file = "pexpect-4.8.0.tar.gz", hash = "sha256:fc65a43959d153d0114afe13997d439c22823a27cefceb5ff35c2178c6784c0c"},
+]
+phonenumberslite = [
+    {file = "phonenumberslite-8.12.3-py2.py3-none-any.whl", hash = "sha256:c3c632f68dc71f6b5a00d3cbd5729286b62e3d90d10fea3ffdd87c9ce066de88"},
+    {file = "phonenumberslite-8.12.3.tar.gz", hash = "sha256:7b1800f581289711e24d8aa80f09a71ef7591a92e725b73d9cc58a4f7757de2d"},
 ]
 pickleshare = [
     {file = "pickleshare-0.7.5-py2.py3-none-any.whl", hash = "sha256:9649af414d74d4df115d5d718f82acb59c9d418196b7b4290ed47a12ce62df56"},
