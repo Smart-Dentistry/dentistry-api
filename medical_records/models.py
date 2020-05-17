@@ -41,7 +41,7 @@ class Patient(models.Model):
         choices=CountryOfResidence.choices,
         default=CountryOfResidence.ECUADOR,
     )
-    address = JSONField()
+    address = JSONField(blank=True, null=True)
     phone = PhoneNumberField()
     whatsapp = models.BooleanField(default=False)
     health_insurance_company = models.CharField(max_length=50, blank=True)
@@ -56,8 +56,8 @@ class Patient(models.Model):
     referral_source = models.CharField(
         max_length=1, choices=ReferralSourceChoices.choices
     )
-    emergency_contact = JSONField()
-    representative = JSONField()
-    family_history = JSONField()
-    personal_history = JSONField()
-    general_practitioners = JSONField()
+    emergency_contact = JSONField(blank=True, null=True)
+    representative = JSONField(blank=True, null=True)
+    family_history = JSONField(blank=True, null=True)
+    personal_history = JSONField(blank=True, null=True)
+    general_practitioners = JSONField(blank=True, null=True)
