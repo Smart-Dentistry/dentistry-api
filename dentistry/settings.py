@@ -20,7 +20,10 @@ env = environ.Env(
     # the default value of SECRET_KEY is only used with the purpose of
     # collecting static files during the container creation
     SECRET_KEY=(str, '7!#06r6*cj#uudggby6g2$8ttnez4)fte!ju0bkh1+((ph$9b!'),
-    ALLOWED_HOSTS=(list, ['*'])
+    ALLOWED_HOSTS=(list, ['*']),
+    AWS_STORAGE_BUCKET_NAME=(str, 'smart-dentistry'),
+    AWS_ACCESS_KEY_ID=(str, 'AKIAJRIYYJ3RLQ4GGZAQ'),
+    AWS_SECRET_ACCESS_KEY=(str, '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')
 )
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -53,6 +56,7 @@ INSTALLED_APPS = [
     'django_extensions',
     'rest_framework',
     'corsheaders',
+    'storages',
 ]
 
 MIDDLEWARE = [
@@ -144,3 +148,14 @@ CORS_ORIGIN_WHITELIST = [
     "http://localhost:3000",
     "https://dentistry-web.herokuapp.com"
 ]
+
+# S3 setup
+AWS_STORAGE_BUCKET_NAME = env('AWS_STORAGE_BUCKET_NAME')
+AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+AWS_ACCESS_KEY_ID = env('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = env('AWS_SECRET_ACCESS_KEY')
+AWS_S3_FILE_OVERWRITE = False
+
+# Media files
+MEDIA_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/"
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
