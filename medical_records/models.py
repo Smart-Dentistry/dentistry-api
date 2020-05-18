@@ -1,10 +1,11 @@
 from django.db import models
 from django.contrib.postgres.fields import JSONField
+from django_extensions.db.models import TimeStampedModel
 
 from phonenumber_field.modelfields import PhoneNumberField
 
 
-class Patient(models.Model):
+class Patient(TimeStampedModel):
     photo = models.URLField(blank=True)
     first_name = models.CharField(max_length=50)
     middle_name = models.CharField(max_length=50, blank=True)
