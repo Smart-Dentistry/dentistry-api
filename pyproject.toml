@@ -20,8 +20,8 @@ boto3 = "^1.13.11"
 django-phonenumber-field = {extras = ["phonenumberslite"], version = "^4.0.0"}
 
 [tool.poetry.dev-dependencies]
-ipython = "^7.14.0"
 pytest-django = "^3.9.0"
+notebook = "^6.0.3"
 
 [build-system]
 requires = ["poetry>=1.0"]
