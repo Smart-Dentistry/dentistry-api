@@ -1,11 +1,9 @@
 from django.core.management.base import BaseCommand, CommandError
-from django.contrib.auth import get_user_model
+from core.factories import UserFactory
 
-User = get_user_model()
-PASSWORD = 'pi3.1415'
 DEVS = [
-    {'username': 'm', 'password': PASSWORD, 'email': 'm@mathsistor.com'},
-    {'username': 'sika', 'password': PASSWORD, 'email': 'sikabarca@gmail.com'}
+    {'username': 'm', 'email': 'm@mathsistor.com'},
+    {'username': 'sika', 'email': 'sikabarca@gmail.com'}
 ]
 
 
@@ -15,7 +13,7 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         for dev in DEVS:
             try:
-                User.objects.create_superuser(**dev)
+                UserFactory(**dev, is_superuser=True, is_staff=True)
             except Exception:
                 raise CommandError('Database was not seed.')
 
