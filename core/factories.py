@@ -40,11 +40,14 @@ class PatientFactory(factory.django.DjangoModelFactory):
 
     class Meta:
         abstract = True
+        model = Patient
 
 
 class MalePatientFactory(PatientFactory):
-    class Meta:
-        model = Patient
-
     first_name = factory.Faker("first_name_male")
     sex = "M"
+
+
+class FemalePatientFactory(PatientFactory):
+    first_name = factory.Faker("first_name_female")
+    sex = "F"
