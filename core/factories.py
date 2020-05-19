@@ -21,7 +21,7 @@ class PatientFactory(factory.django.DjangoModelFactory):
     last_name = factory.Faker("last_name")
     id_document_number = FuzzyText(length=10, chars=string.digits)
     job_title = factory.Faker("job")
-    birthdate = "1990-01-01"
+    birthdate = factory.Faker("date")
     phone = FuzzyChoice(
         [
             "+593983761752",
