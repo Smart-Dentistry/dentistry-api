@@ -34,3 +34,20 @@ class PatientSerializer(serializers.ModelSerializer):
             "personal_history",
             "general_practitioners",
         ]
+
+
+class PatientTableSerializer(serializers.ModelSerializer):
+    key = serializers.IntegerField(source="id", read_only=True)
+
+    class Meta:
+        model = Patient
+        fields = [
+            "key",
+            "first_name",
+            "last_name",
+            "id_document_number",
+            "email",
+            "phone",
+            "birthdate",
+            "whatsapp",
+        ]
