@@ -1,6 +1,7 @@
 import string
 
 from django.contrib.auth import get_user_model
+from django.conf import settings
 
 import factory
 from factory.fuzzy import FuzzyText, FuzzyChoice
@@ -8,6 +9,9 @@ from factory.fuzzy import FuzzyText, FuzzyChoice
 from medical_records.models import Patient
 
 User = get_user_model()
+S3_BASE_URL = f'https://{settings.AWS_S3_CUSTOM_DOMAIN}'
+FEMALE_PHOTOS = [f'{S3_BASE_URL}/photo_0.png', f'{S3_BASE_URL}/photo_1.png']
+MALE_PHOTOS = [f'{S3_BASE_URL}/photo_2.png', f'{S3_BASE_URL}/photo_3.png']
 
 
 class UserFactory(factory.django.DjangoModelFactory):
@@ -44,10 +48,12 @@ class PatientFactory(factory.django.DjangoModelFactory):
 
 
 class MalePatientFactory(PatientFactory):
+    profile_picture_url = FuzzyChoice(MALE_PHOTOS)
     first_name = factory.Faker("first_name_male")
     sex = "M"
 
 
 class FemalePatientFactory(PatientFactory):
+    profile_picture_url = FuzzyChoice(FEMALE_PHOTOS)
     first_name = factory.Faker("first_name_female")
     sex = "F"
