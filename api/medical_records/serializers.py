@@ -41,6 +41,14 @@ class PatientTableSerializer(serializers.ModelSerializer):
     key = serializers.IntegerField(source="id", read_only=True)
     age = serializers.SerializerMethodField()
 
+    def get_age(self, obj):
+        today = now().date()
+        return (
+            today.year
+            - obj.birthdate.year
+            - ((today.month, today.day) < (obj.birthdate.month, obj.birthdate.day))
+        )
+
     class Meta:
         model = Patient
         fields = [
@@ -54,11 +62,3 @@ class PatientTableSerializer(serializers.ModelSerializer):
             "whatsapp",
             "age",
         ]
-
-    def get_age(self, obj):
-        today = now().date()
-        return (
-            today.year
-            - obj.birthdate.year
-            - ((today.month, today.day) < (obj.birthdate.month, obj.birthdate.day))
-        )
