@@ -31,7 +31,7 @@ def test_patient_serializer_has_expected_fields():
     data = serializer.data
     assert set(data.keys()) == {
         "key",
-        "photo",
+        "profile_picture_url",
         "first_name",
         "middle_name",
         "last_name",
@@ -83,7 +83,7 @@ def test_patient_table_serializer_has_expected_fields():
     data = serializer.data
     assert set(data.keys()) == {
         "key",
-        "photo",
+        "profile_picture_url",
         "first_name",
         "last_name",
         "id_document_number",

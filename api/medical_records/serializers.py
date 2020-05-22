@@ -10,7 +10,7 @@ class PatientSerializer(serializers.ModelSerializer):
         model = Patient
         fields = [
             "key",
-            "photo",
+            "profile_picture_url",
             "first_name",
             "middle_name",
             "last_name",
@@ -43,7 +43,7 @@ class PatientTableSerializer(serializers.ModelSerializer):
         model = Patient
         fields = [
             "key",
-            "photo",
+            "profile_picture_url",
             "first_name",
             "last_name",
             "id_document_number",
