@@ -1,5 +1,6 @@
 from medical_records.models import Patient
 
+from datetime import datetime
 import pytest
 
 from .serializers import PatientSerializer, PatientTableSerializer
@@ -69,7 +70,7 @@ def test_patient_table_serializer_has_expected_fields():
         sex="F",
         job_title="Engineer",
         marital_status="SI",
-        birthdate="2010-01-01",
+        birthdate=datetime.strptime("2010-01-01", "%Y-%m-%d").date(),
         country_of_residence="A",
         address=None,
         phone="+593987878787",
@@ -87,8 +88,8 @@ def test_patient_table_serializer_has_expected_fields():
         "first_name",
         "last_name",
         "id_document_number",
-        "birthdate",
         "phone",
         "whatsapp",
         "email",
+        "age",
     }
