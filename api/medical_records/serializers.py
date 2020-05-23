@@ -1,3 +1,4 @@
+from django.utils.timezone import now
 from rest_framework import serializers
 
 from medical_records.models import Patient
@@ -38,6 +39,15 @@ class PatientSerializer(serializers.ModelSerializer):
 
 class PatientTableSerializer(serializers.ModelSerializer):
     key = serializers.IntegerField(source="id", read_only=True)
+    age = serializers.SerializerMethodField()
+
+    def get_age(self, obj):
+        today = now().date()
+        return (
+            today.year
+            - obj.birthdate.year
+            - ((today.month, today.day) < (obj.birthdate.month, obj.birthdate.day))
+        )
 
     class Meta:
         model = Patient
@@ -49,6 +59,6 @@ class PatientTableSerializer(serializers.ModelSerializer):
             "id_document_number",
             "email",
             "phone",
-            "birthdate",
             "whatsapp",
+            "age",
         ]

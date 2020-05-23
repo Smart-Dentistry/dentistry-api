@@ -1,32 +1,17 @@
-from medical_records.models import Patient
+import datetime
+
+from django.utils.timezone import make_aware
 
 import pytest
 
+from core.factories import MalePatientFactory
 from .serializers import PatientSerializer, PatientTableSerializer
 
 
 @pytest.mark.django_db
 def test_patient_serializer_has_expected_fields():
     """Test that PatientSerializer has expected fields"""
-    patient = Patient.objects.create(
-        first_name="Mary",
-        middle_name="Jane",
-        last_name="Jones",
-        second_last_name="",
-        id_document_number="123456789",
-        sex="F",
-        job_title="Engineer",
-        marital_status="SI",
-        birthdate="2010-01-01",
-        country_of_residence="A",
-        address=None,
-        phone="+593987878787",
-        whatsapp=False,
-        health_insurance_company="",
-        email="mary@example.com",
-        receive_promos=True,
-        referral_source="S",
-    )
+    patient = MalePatientFactory()
     serializer = PatientSerializer(patient)
     data = serializer.data
     assert set(data.keys()) == {
@@ -60,25 +45,7 @@ def test_patient_serializer_has_expected_fields():
 @pytest.mark.django_db
 def test_patient_table_serializer_has_expected_fields():
     """Test that PatientTableSerializer has expected fields"""
-    patient = Patient.objects.create(
-        first_name="Mary",
-        middle_name="Jane",
-        last_name="Jones",
-        second_last_name="",
-        id_document_number="123456789",
-        sex="F",
-        job_title="Engineer",
-        marital_status="SI",
-        birthdate="2010-01-01",
-        country_of_residence="A",
-        address=None,
-        phone="+593987878787",
-        whatsapp=False,
-        health_insurance_company="",
-        email="mary@example.com",
-        receive_promos=True,
-        referral_source="S",
-    )
+    patient = MalePatientFactory()
     serializer = PatientTableSerializer(patient)
     data = serializer.data
     assert set(data.keys()) == {
@@ -87,8 +54,20 @@ def test_patient_table_serializer_has_expected_fields():
         "first_name",
         "last_name",
         "id_document_number",
-        "birthdate",
         "phone",
         "whatsapp",
         "email",
+        "age",
     }
+
+
+@pytest.mark.django_db
+def test_patient_table_serializer_age(mocker):
+    """Test that PatientTableSerializer returns correct value for age"""
+    now_mock = mocker.patch("django.utils.timezone.now")
+    now_mock.return_value = make_aware(
+        datetime.datetime.strptime("2020-02-01", "%Y-%m-%d")
+    )
+    patient = MalePatientFactory(birthdate=datetime.date(2010, 1, 1))
+    serializer = PatientTableSerializer(patient)
+    assert serializer.data["age"] == 10
