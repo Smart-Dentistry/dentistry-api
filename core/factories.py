@@ -1,10 +1,11 @@
+from datetime import datetime
 import string
 
 from django.contrib.auth import get_user_model
 from django.conf import settings
 
 import factory
-from factory.fuzzy import FuzzyText, FuzzyChoice
+from factory.fuzzy import FuzzyText, FuzzyChoice, FuzzyDate
 
 from medical_records.models import Patient
 
@@ -25,7 +26,7 @@ class PatientFactory(factory.django.DjangoModelFactory):
     last_name = factory.Faker("last_name")
     id_document_number = FuzzyText(length=10, chars=string.digits)
     job_title = factory.Faker("job")
-    birthdate = factory.Faker("date")
+    birthdate = FuzzyDate(datetime(1920, 1, 1).date())
     phone = FuzzyChoice(
         [
             "+593983761752",
