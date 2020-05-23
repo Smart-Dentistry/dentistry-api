@@ -1,4 +1,4 @@
-from datetime import datetime
+import datetime
 
 from django.utils.timezone import make_aware
 
@@ -65,9 +65,9 @@ def test_patient_table_serializer_has_expected_fields():
 def test_patient_table_serializer_age(mocker):
     """Test that PatientTableSerializer returns correct value for age"""
     now_mock = mocker.patch("django.utils.timezone.now")
-    now_mock.return_value = make_aware(datetime.strptime("2020-02-01", "%Y-%m-%d"))
-    patient = MalePatientFactory(
-        birthdate=make_aware(datetime.strptime("2010-01-01", "%Y-%m-%d")).date()
+    now_mock.return_value = make_aware(
+        datetime.datetime.strptime("2020-02-01", "%Y-%m-%d")
     )
+    patient = MalePatientFactory(birthdate=datetime.date(2010, 1, 1))
     serializer = PatientTableSerializer(patient)
     assert serializer.data["age"] == 10

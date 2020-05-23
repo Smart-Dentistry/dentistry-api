@@ -1,4 +1,4 @@
-from datetime import datetime
+import datetime
 import string
 
 from django.contrib.auth import get_user_model
@@ -26,7 +26,7 @@ class PatientFactory(factory.django.DjangoModelFactory):
     last_name = factory.Faker("last_name")
     id_document_number = FuzzyText(length=10, chars=string.digits)
     job_title = factory.Faker("job")
-    birthdate = FuzzyDate(datetime(1920, 1, 1).date())
+    birthdate = FuzzyDate(datetime.date(1920, 1, 1))
     phone = FuzzyChoice(
         [
             "+593983761752",
