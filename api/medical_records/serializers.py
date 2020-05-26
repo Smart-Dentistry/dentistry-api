@@ -1,5 +1,6 @@
 from django.utils.timezone import now
 from rest_framework import serializers
+from drf_yasg.utils import swagger_serializer_method
 
 from medical_records.models import Patient
 
@@ -41,6 +42,7 @@ class PatientTableSerializer(serializers.ModelSerializer):
     key = serializers.IntegerField(source="id", read_only=True)
     age = serializers.SerializerMethodField()
 
+    @swagger_serializer_method(serializer_or_field=serializers.IntegerField)
     def get_age(self, obj):
         today = now().date()
         return (
