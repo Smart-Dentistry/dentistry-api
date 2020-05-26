@@ -10,7 +10,7 @@ class PatientViewSet(viewsets.ModelViewSet):
     queryset = Patient.objects.all()
     serializer_class = PatientSerializer
 
-    @swagger_auto_schema(responses={200: PatientTableSerializer})
+    @swagger_auto_schema(responses={200: PatientTableSerializer(many=True)})
     def list(self, request):
         queryset = Patient.objects.all()
         serializer = PatientTableSerializer(queryset, many=True)
