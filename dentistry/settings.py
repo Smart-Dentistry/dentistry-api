@@ -21,9 +21,6 @@ env = environ.Env(
     # collecting static files during the container creation
     SECRET_KEY=(str, '7!#06r6*cj#uudggby6g2$8ttnez4)fte!ju0bkh1+((ph$9b!'),
     ALLOWED_HOSTS=(list, ['*']),
-    AWS_STORAGE_BUCKET_NAME=(str, 'smart-dentistry'),
-    AWS_ACCESS_KEY_ID=(str, 'AKIAJRIYYJ3RLQ4GGZAQ'),
-    AWS_SECRET_ACCESS_KEY=(str, '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')
 )
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
