@@ -1,8 +1,12 @@
+from django.conf import settings
+from django.utils.timezone import now
+from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.status import HTTP_400_BAD_REQUEST
 
 import boto3
 from botocore.exceptions import ClientError
+
 
 # The following code has been taken from:
 # https://boto3.amazonaws.com/v1/documentation/api/latest/guide/s3-presigned-urls.html#generating-a-presigned-url-to-upload-a-file
@@ -24,16 +28,25 @@ def create_presigned_post(
 
     # Generate a presigned S3 POST URL
     s3_client = boto3.client("s3")
-    try:
-        response = s3_client.generate_presigned_post(
-            bucket_name,
-            object_name,
-            Fields=fields,
-            Conditions=conditions,
-            ExpiresIn=expiration,
-        )
-    except ClientError as e:
-        return Response({"error": str(e)}, status=HTTP_400_BAD_REQUEST)
+    response = s3_client.generate_presigned_post(
+        bucket_name,
+        object_name,
+        Fields=fields,
+        Conditions=conditions,
+        ExpiresIn=expiration,
+    )
 
     # The response contains the presigned URL and required fields
     return response
+
+
+@api_view()
+def get_presigned_url(request):
+    try:
+        response = create_presigned_post(
+            settings.AWS_STORAGE_BUCKET_NAME, f"{now()}-filename"
+        )
+    except ClientError:
+        return Response(status=HTTP_400_BAD_REQUEST)
+
+    return Response(response)
