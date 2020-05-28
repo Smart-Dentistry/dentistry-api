@@ -44,7 +44,9 @@ def get_presigned_url(request):
     try:
         response = create_presigned_post(
             settings.AWS_STORAGE_BUCKET_NAME,
-            request.query_params['Key']
+            request.query_params['Key'],
+            {'Content-Type': request.query_params['ContentType']},
+            [{'Content-Type': request.query_params['ContentType']}]
         )
     except ClientError:
         return Response(status=HTTP_400_BAD_REQUEST)
