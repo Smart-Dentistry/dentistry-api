@@ -24,3 +24,23 @@ PROVINCES_OF_ECUADOR = [
     {"key": 23, "name": "Tungurahua"},
     {"key": 24, "name": "Zamora Chinchipe"},
 ]
+
+CANTONS_OF_ECUADOR = {
+    1: [
+        {"key": 1, "name": "Camilo Ponce Enríquez"},
+        {"key": 2, "name": "Chordeleg"},
+        {"key": 3, "name": "Cuenca"},
+        {"key": 4, "name": "El Pan"},
+        {"key": 5, "name": "Girón"},
+        {"key": 6, "name": "Guachapala"},
+        {"key": 7, "name": "Gualaceo"},
+        {"key": 8, "name": "Nabón"},
+        {"key": 9, "name": "Oña"},
+        {"key": 10, "name": "Paute"},
+        {"key": 11, "name": "Pucará"},
+        {"key": 12, "name": "San Fernando"},
+        {"key": 13, "name": "Santa Isabel"},
+        {"key": 14, "name": "Sevilla de Oro"},
+        {"key": 15, "name": "Sigsig"},
+    ]
+}
