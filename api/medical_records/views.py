@@ -2,6 +2,7 @@ from rest_framework import viewsets
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.status import HTTP_400_BAD_REQUEST
+from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
 
 
@@ -31,7 +32,18 @@ def provinces_of_ecuador(request):
     return Response(PROVINCES_OF_ECUADOR)
 
 
-@swagger_auto_schema(method='get', responses={200: ProvinceCantonSerializer(many=True)})
+province_key = openapi.Parameter(
+    'province_key',
+    openapi.IN_PATH,
+    type=openapi.TYPE_INTEGER,
+    required=True
+)
+
+
+@swagger_auto_schema(
+    method='get',
+    manual_parameters=[province_key],
+    responses={200: ProvinceCantonSerializer(many=True)})
 @api_view()
 def cantons_by_province(request, province_key=None):
     try:
