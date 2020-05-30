@@ -296,3 +296,17 @@ CANTONS_OF_ECUADOR = {
         {"key": 221, "name": "Zamora"},
     ],
 }
+
+DISEASES = [
+    {"key": 1, "name": "diabetes"},
+    {"key": 2, "name": "hypertension"},
+    {"key": 3, "name": "cardiovascular_disease"},
+    {"key": 4, "name": "neoplasm"},
+    {"key": 5, "name": "epilepsy"},
+    {"key": 6, "name": "malformation"},
+    {"key": 7, "name": "aids"},
+    {"key": 8, "name": "kidney_diseases"},
+    {"key": 9, "name": "hepatitis"},
+    {"key": 10, "name": "arthritis"},
+    {"key": 11, "name": "others"},
+]
