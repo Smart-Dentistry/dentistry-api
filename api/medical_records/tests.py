@@ -8,7 +8,11 @@ from rest_framework.test import APIClient
 import pytest
 
 from core.factories import MalePatientFactory
-from .serializers import PatientSerializer, PatientTableSerializer, ProvinceSerializer
+from .serializers import (
+    PatientSerializer,
+    PatientTableSerializer,
+    ProvinceCantonSerializer,
+)
 
 
 @pytest.fixture
@@ -82,16 +86,16 @@ def test_patient_table_serializer_age(mocker):
     assert serializer.data["age"] == 10
 
 
-def test_province_serializer_has_expected_fields():
-    """Test that ProvinceSerializer has expected fields"""
-    serializer = ProvinceSerializer()
+def test_province_canton_serializer_has_expected_fields():
+    """Test that ProvinceCantonSerializer has expected fields"""
+    serializer = ProvinceCantonSerializer()
     data = serializer.data
     assert set(data.keys()) == {"key", "name"}
 
 
 def test_province_cantons_returns_400_when_no_province(api_client):
     """Tests that 400 response is returned when no province for province_key"""
-    url = reverse('cantons_by_province', kwargs={'province_key': 50})
+    url = reverse("cantons_by_province", kwargs={"province_key": 50})
     response = api_client.get(url)
 
     assert response.status_code == HTTP_400_BAD_REQUEST
@@ -99,7 +103,7 @@ def test_province_cantons_returns_400_when_no_province(api_client):
 
 def test_provice_cantons_are_returned_successfully(api_client):
     """Test that 200 response and cants are returned when province exists"""
-    url = reverse('cantons_by_province', kwargs={'province_key': 9})
+    url = reverse("cantons_by_province", kwargs={"province_key": 9})
     response = api_client.get(url)
     data = response.data
 

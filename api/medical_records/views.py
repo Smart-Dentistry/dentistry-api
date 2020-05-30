@@ -5,7 +5,11 @@ from rest_framework.status import HTTP_400_BAD_REQUEST
 from drf_yasg.utils import swagger_auto_schema
 
 
-from .serializers import PatientTableSerializer, PatientSerializer, ProvinceSerializer
+from .serializers import (
+    PatientTableSerializer,
+    PatientSerializer,
+    ProvinceCantonSerializer
+)
 from medical_records.models import Patient
 from medical_records.constants import PROVINCES_OF_ECUADOR, CANTONS_OF_ECUADOR
 
@@ -21,7 +25,7 @@ class PatientViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
 
-@swagger_auto_schema(method='get', responses={200: ProvinceSerializer(many=True)})
+@swagger_auto_schema(method='get', responses={200: ProvinceCantonSerializer(many=True)})
 @api_view()
 def provinces_of_ecuador(request):
     return Response(PROVINCES_OF_ECUADOR)

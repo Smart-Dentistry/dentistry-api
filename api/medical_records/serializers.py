@@ -66,6 +66,6 @@ class PatientTableSerializer(serializers.ModelSerializer):
         ]
 
 
-class ProvinceSerializer(serializers.Serializer):
+class ProvinceCantonSerializer(serializers.Serializer):
     key = serializers.IntegerField()
     name = serializers.CharField()
