@@ -21,6 +21,10 @@ env = environ.Env(
     # collecting static files during the container creation
     SECRET_KEY=(str, '7!#06r6*cj#uudggby6g2$8ttnez4)fte!ju0bkh1+((ph$9b!'),
     ALLOWED_HOSTS=(list, ['*']),
+    AWS_STORAGE_BUCKET_NAME=(str, 'silly-bucket'),
+    AWS_ACCESS_KEY_ID=(str, 'silly-key'),
+    AWS_SECRET_ACCESS_KEY=(str, 'silly-secret'),
+    AWS_S3_REGION_NAME=(str, 'us-east-1')
 )
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
