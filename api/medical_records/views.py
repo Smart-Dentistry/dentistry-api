@@ -31,6 +31,7 @@ def provinces_of_ecuador(request):
     return Response(PROVINCES_OF_ECUADOR)
 
 
+@swagger_auto_schema(method='get', responses={200: ProvinceCantonSerializer(many=True)})
 @api_view()
 def cantons_by_province(request, province_key=None):
     try:
