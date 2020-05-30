@@ -64,3 +64,8 @@ class PatientTableSerializer(serializers.ModelSerializer):
             "whatsapp",
             "age",
         ]
+
+
+class ProvinceCantonSerializer(serializers.Serializer):
+    key = serializers.IntegerField()
+    name = serializers.CharField()

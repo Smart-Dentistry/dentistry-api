@@ -1,11 +1,24 @@
 import datetime
 
+from django.urls import reverse
 from django.utils.timezone import make_aware
+from rest_framework.status import HTTP_400_BAD_REQUEST, HTTP_200_OK
+from rest_framework.test import APIClient
 
 import pytest
 
 from core.factories import MalePatientFactory
-from .serializers import PatientSerializer, PatientTableSerializer
+from .serializers import (
+    PatientSerializer,
+    PatientTableSerializer,
+    ProvinceCantonSerializer,
+)
+
+
+@pytest.fixture
+def api_client():
+    """A fixture for an APIClient"""
+    return APIClient()
 
 
 @pytest.mark.django_db
@@ -71,3 +84,32 @@ def test_patient_table_serializer_age(mocker):
     patient = MalePatientFactory(birthdate=datetime.date(2010, 1, 1))
     serializer = PatientTableSerializer(patient)
     assert serializer.data["age"] == 10
+
+
+def test_province_canton_serializer_has_expected_fields():
+    """Test that ProvinceCantonSerializer has expected fields"""
+    serializer = ProvinceCantonSerializer()
+    data = serializer.data
+    assert set(data.keys()) == {"key", "name"}
+
+
+def test_province_cantons_returns_400_when_no_province(api_client):
+    """Tests that 400 response is returned when no province for province_key"""
+    url = reverse("cantons_by_province", kwargs={"province_key": 50})
+    response = api_client.get(url)
+
+    assert response.status_code == HTTP_400_BAD_REQUEST
+
+
+def test_provice_cantons_are_returned_successfully(api_client):
+    """Test that 200 response and cants are returned when province exists"""
+    url = reverse("cantons_by_province", kwargs={"province_key": 9})
+    response = api_client.get(url)
+    data = response.data
+
+    assert response.status_code == HTTP_200_OK
+    assert data == [
+        {"key": 74, "name": "Isabela"},
+        {"key": 75, "name": "San Cristóbal"},
+        {"key": 76, "name": "Santa Cruz"},
+    ]
