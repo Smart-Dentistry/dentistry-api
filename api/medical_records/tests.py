@@ -5,7 +5,7 @@ from django.utils.timezone import make_aware
 import pytest
 
 from core.factories import MalePatientFactory
-from .serializers import PatientSerializer, PatientTableSerializer
+from .serializers import PatientSerializer, PatientTableSerializer, ProvinceSerializer
 
 
 @pytest.mark.django_db
@@ -71,3 +71,10 @@ def test_patient_table_serializer_age(mocker):
     patient = MalePatientFactory(birthdate=datetime.date(2010, 1, 1))
     serializer = PatientTableSerializer(patient)
     assert serializer.data["age"] == 10
+
+
+def test_province_serializer_has_expected_fields():
+    """Test that ProvinceSerializer has expected fields"""
+    serializer = ProvinceSerializer()
+    data = serializer.data
+    assert set(data.keys()) == {"key", "name"}
