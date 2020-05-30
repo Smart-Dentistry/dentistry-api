@@ -9,7 +9,7 @@ from drf_yasg.utils import swagger_auto_schema
 from .serializers import (
     PatientTableSerializer,
     PatientSerializer,
-    ProvinceCantonSerializer
+    KeyNameSerializer
 )
 from medical_records.models import Patient
 from medical_records.constants import PROVINCES_OF_ECUADOR, CANTONS_OF_ECUADOR
@@ -26,7 +26,7 @@ class PatientViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
 
-@swagger_auto_schema(method='get', responses={200: ProvinceCantonSerializer(many=True)})
+@swagger_auto_schema(method='get', responses={200: KeyNameSerializer(many=True)})
 @api_view()
 def provinces_of_ecuador(request):
     return Response(PROVINCES_OF_ECUADOR)
@@ -43,7 +43,7 @@ province_key = openapi.Parameter(
 @swagger_auto_schema(
     method='get',
     manual_parameters=[province_key],
-    responses={200: ProvinceCantonSerializer(many=True)})
+    responses={200: KeyNameSerializer(many=True)})
 @api_view()
 def cantons_by_province(request, province_key=None):
     try:

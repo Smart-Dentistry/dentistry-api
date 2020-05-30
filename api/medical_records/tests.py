@@ -11,7 +11,7 @@ from core.factories import MalePatientFactory
 from .serializers import (
     PatientSerializer,
     PatientTableSerializer,
-    ProvinceCantonSerializer,
+    KeyNameSerializer,
 )
 
 
@@ -86,9 +86,9 @@ def test_patient_table_serializer_age(mocker):
     assert serializer.data["age"] == 10
 
 
-def test_province_canton_serializer_has_expected_fields():
-    """Test that ProvinceCantonSerializer has expected fields"""
-    serializer = ProvinceCantonSerializer()
+def test_key_name_serializer_has_expected_fields():
+    """Test that KeyNameSerializer has expected fields"""
+    serializer = KeyNameSerializer()
     data = serializer.data
     assert set(data.keys()) == {"key", "name"}
 
