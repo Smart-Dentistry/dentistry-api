@@ -298,15 +298,15 @@ CANTONS_OF_ECUADOR = {
 }
 
 DISEASES = [
-    {"key": 1, "name": "diabetes"},
-    {"key": 2, "name": "hypertension"},
-    {"key": 3, "name": "cardiovascular_disease"},
-    {"key": 4, "name": "neoplasm"},
-    {"key": 5, "name": "epilepsy"},
-    {"key": 6, "name": "malformation"},
-    {"key": 7, "name": "aids"},
-    {"key": 8, "name": "kidney_diseases"},
-    {"key": 9, "name": "hepatitis"},
-    {"key": 10, "name": "arthritis"},
-    {"key": 11, "name": "others"},
+    {"key": 1, "name": "Diabetes"},
+    {"key": 2, "name": "Hypertension"},
+    {"key": 3, "name": "Cardiovascular disease"},
+    {"key": 4, "name": "Neoplasm"},
+    {"key": 5, "name": "Epilepsy"},
+    {"key": 6, "name": "Malformation"},
+    {"key": 7, "name": "AIDS"},
+    {"key": 8, "name": "Kidney diseases"},
+    {"key": 9, "name": "Hepatitis"},
+    {"key": 10, "name": "Arthritis"},
+    {"key": 11, "name": "Others"},
 ]
