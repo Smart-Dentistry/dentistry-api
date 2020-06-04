@@ -11,7 +11,7 @@ from core.factories import MalePatientFactory
 from .serializers import (
     PatientSerializer,
     PatientTableSerializer,
-    KeyNameSerializer,
+    ValueLabelSerializer,
 )
 
 
@@ -86,11 +86,11 @@ def test_patient_table_serializer_age(mocker):
     assert serializer.data["age"] == 10
 
 
-def test_key_name_serializer_has_expected_fields():
-    """Test that KeyNameSerializer has expected fields"""
-    serializer = KeyNameSerializer()
+def test_value_label_serializer_has_expected_fields():
+    """Test that ValueLabelSerializer has expected fields"""
+    serializer = ValueLabelSerializer()
     data = serializer.data
-    assert set(data.keys()) == {"key", "name"}
+    assert set(data.keys()) == {"value", "label"}
 
 
 def test_province_cantons_returns_400_when_no_province(api_client):
@@ -109,7 +109,7 @@ def test_provice_cantons_are_returned_successfully(api_client):
 
     assert response.status_code == HTTP_200_OK
     assert data == [
-        {"key": 74, "name": "Isabela"},
-        {"key": 75, "name": "San Cristóbal"},
-        {"key": 76, "name": "Santa Cruz"},
+        {"value": 74, "label": "Isabela"},
+        {"value": 75, "label": "San Cristóbal"},
+        {"value": 76, "label": "Santa Cruz"},
     ]
