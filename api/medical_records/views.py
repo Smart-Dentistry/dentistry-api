@@ -6,7 +6,7 @@ from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
 
 
-from .serializers import PatientTableSerializer, PatientSerializer, KeyNameSerializer
+from .serializers import PatientTableSerializer, PatientSerializer, ValueLabelSerializer
 from medical_records.models import Patient
 from medical_records.constants import PROVINCES_OF_ECUADOR, CANTONS_OF_ECUADOR, DISEASES
 
@@ -22,7 +22,7 @@ class PatientViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
 
-@swagger_auto_schema(method="get", responses={200: KeyNameSerializer(many=True)})
+@swagger_auto_schema(method="get", responses={200: ValueLabelSerializer(many=True)})
 @api_view()
 def provinces_of_ecuador(request):
     return Response(PROVINCES_OF_ECUADOR)
@@ -36,7 +36,7 @@ province_key = openapi.Parameter(
 @swagger_auto_schema(
     method="get",
     manual_parameters=[province_key],
-    responses={200: KeyNameSerializer(many=True)},
+    responses={200: ValueLabelSerializer(many=True)},
 )
 @api_view()
 def cantons_by_province(request, province_key=None):
@@ -48,7 +48,7 @@ def cantons_by_province(request, province_key=None):
     return Response(cantons)
 
 
-@swagger_auto_schema(method="get", responses={200: KeyNameSerializer(many=True)})
+@swagger_auto_schema(method="get", responses={200: ValueLabelSerializer(many=True)})
 @api_view()
 def diseases(request):
     return Response(DISEASES)
