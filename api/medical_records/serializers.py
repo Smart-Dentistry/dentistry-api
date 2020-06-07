@@ -7,6 +7,16 @@ from medical_records.models import Patient
 
 class PatientSerializer(serializers.ModelSerializer):
     key = serializers.IntegerField(source="id", read_only=True)
+    age = serializers.SerializerMethodField()
+
+    @swagger_serializer_method(serializer_or_field=serializers.IntegerField)
+    def get_age(self, obj):
+        today = now().date()
+        return (
+            today.year
+            - obj.birthdate.year
+            - ((today.month, today.day) < (obj.birthdate.month, obj.birthdate.day))
+        )
 
     class Meta:
         model = Patient
@@ -35,6 +45,7 @@ class PatientSerializer(serializers.ModelSerializer):
             "family_history",
             "personal_history",
             "general_practitioners",
+            "age"
         ]
 
 

@@ -52,6 +52,7 @@ def test_patient_serializer_has_expected_fields():
         "family_history",
         "personal_history",
         "general_practitioners",
+        "age"
     }
 
 
