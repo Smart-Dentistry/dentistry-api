@@ -70,7 +70,6 @@ class PatientTableSerializer(serializers.ModelSerializer):
             "first_name",
             "last_name",
             "id_document_number",
-            "email",
             "phone",
             "whatsapp",
             "age",

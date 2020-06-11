@@ -70,7 +70,6 @@ def test_patient_table_serializer_has_expected_fields():
         "id_document_number",
         "phone",
         "whatsapp",
-        "email",
         "age",
     }
 
