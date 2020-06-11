@@ -70,6 +70,7 @@ def test_patient_table_serializer_has_expected_fields():
         "id_document_number",
         "phone",
         "whatsapp",
+        "whatsapp_link",
         "age",
     }
 
@@ -84,6 +85,14 @@ def test_patient_table_serializer_age(mocker):
     patient = MalePatientFactory(birthdate=datetime.date(2010, 1, 1))
     serializer = PatientTableSerializer(patient)
     assert serializer.data["age"] == 10
+
+
+@pytest.mark.django_db
+def test_patient_table_serializer_whatsapp_link(mocker):
+    """Test that PatientTableSerializer returns correct value for whatsapp_link"""
+    patient = MalePatientFactory(phone='+13053991321')
+    serializer = PatientTableSerializer(patient)
+    assert serializer.data["whatsapp_link"] == 'https://wa.me/13053991321'
 
 
 def test_value_label_serializer_has_expected_fields():
