@@ -45,13 +45,14 @@ class PatientSerializer(serializers.ModelSerializer):
             "family_history",
             "personal_history",
             "general_practitioners",
-            "age"
+            "age",
         ]
 
 
 class PatientTableSerializer(serializers.ModelSerializer):
     key = serializers.IntegerField(source="id", read_only=True)
     age = serializers.SerializerMethodField()
+    phone = serializers.CharField(source="phone.as_international")
     whatsapp_link = serializers.SerializerMethodField()
 
     @swagger_serializer_method(serializer_or_field=serializers.IntegerField)
@@ -65,7 +66,7 @@ class PatientTableSerializer(serializers.ModelSerializer):
 
     def get_whatsapp_link(self, obj):
         if obj.whatsapp:
-            return f'https://wa.me/{obj.phone.raw_input[1:]}'
+            return f"https://wa.me/{obj.phone.raw_input[1:]}"
 
     class Meta:
         model = Patient

@@ -88,11 +88,21 @@ def test_patient_table_serializer_age(mocker):
 
 
 @pytest.mark.django_db
-def test_patient_table_serializer_whatsapp_link(mocker):
-    """Test that PatientTableSerializer returns correct value for whatsapp_link"""
-    patient = MalePatientFactory(phone='+13053991321')
+def test_patient_table_serializer_whatsapp_link():
+    """Test that PatientTableSerializer returns correct value for whatsapp_link
+    when whatsapp is True"""
+    patient = MalePatientFactory(phone='+13053991321', whatsapp=True)
     serializer = PatientTableSerializer(patient)
     assert serializer.data["whatsapp_link"] == 'https://wa.me/13053991321'
+
+
+@pytest.mark.django_db
+def test_patient_table_serializer_whatsapp_link_no_whatsapp():
+    """Test that PatientTableSerializer returns correct value for whatsapp_link
+    when whatsapp is False"""
+    patient = MalePatientFactory(phone='+13053991321', whatsapp=False)
+    serializer = PatientTableSerializer(patient)
+    assert serializer.data["whatsapp_link"] is None
 
 
 def test_value_label_serializer_has_expected_fields():
