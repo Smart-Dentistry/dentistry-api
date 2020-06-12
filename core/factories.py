@@ -1,5 +1,6 @@
 import datetime
 import string
+from typing import List
 
 from django.contrib.auth import get_user_model
 from django.conf import settings
@@ -10,9 +11,9 @@ from factory.fuzzy import FuzzyText, FuzzyChoice, FuzzyDate
 from medical_records.models import Patient
 
 User = get_user_model()
-S3_BASE_URL = f'https://{settings.AWS_S3_CUSTOM_DOMAIN}'
-FEMALE_PHOTOS = [f'{S3_BASE_URL}/photo_0.png', f'{S3_BASE_URL}/photo_1.png']
-MALE_PHOTOS = [f'{S3_BASE_URL}/photo_2.png', f'{S3_BASE_URL}/photo_3.png']
+S3_BASE_URL = f"https://{settings.AWS_S3_CUSTOM_DOMAIN}"
+FEMALE_PHOTOS = [f"{S3_BASE_URL}/photo_0.png", f"{S3_BASE_URL}/photo_1.png"]
+MALE_PHOTOS = [f"{S3_BASE_URL}/photo_2.png", f"{S3_BASE_URL}/photo_3.png"]
 
 
 class UserFactory(factory.django.DjangoModelFactory):
@@ -42,6 +43,9 @@ class PatientFactory(factory.django.DjangoModelFactory):
     )
     email = factory.Faker("free_email")
     referral_source = FuzzyChoice(Patient.ReferralSourceChoices.values)
+    family_history = {"diseases": [], "observations": ""}
+    personal_history = {"diseases": [], "observations": ""}
+    general_practitioners: List = []
 
     class Meta:
         abstract = True
