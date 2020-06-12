@@ -1,5 +1,6 @@
 from rest_framework import viewsets
 from rest_framework.decorators import api_view
+from rest_framework.generics import ListAPIView
 from rest_framework.response import Response
 from rest_framework.status import HTTP_400_BAD_REQUEST
 from drf_yasg import openapi
@@ -11,15 +12,14 @@ from medical_records.models import Patient
 from medical_records.constants import PROVINCES_OF_ECUADOR, CANTONS_OF_ECUADOR, DISEASES
 
 
+class PatientTableList(ListAPIView):
+    queryset = Patient.objects.all()
+    serializer_class = PatientTableSerializer
+
+
 class PatientViewSet(viewsets.ModelViewSet):
     queryset = Patient.objects.all()
     serializer_class = PatientSerializer
-
-    @swagger_auto_schema(responses={200: PatientTableSerializer(many=True)})
-    def list(self, request):
-        queryset = Patient.objects.all()
-        serializer = PatientTableSerializer(queryset, many=True)
-        return Response(serializer.data)
 
 
 @swagger_auto_schema(method="get", responses={200: ValueLabelSerializer(many=True)})
