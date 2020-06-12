@@ -22,8 +22,8 @@ class Command(BaseCommand):
             male = MalePatientFactory()
             FemalePatientFactory()
         male.address = {
-            "province": "Azuay",
-            "city": "Cuenca",
+            "province": "1",
+            "city": "3",
             "address_line": "Gringolandia",
         }
         male.emergency_contact = {
