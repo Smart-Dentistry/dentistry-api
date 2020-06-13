@@ -5,7 +5,7 @@ description = "This is an API for a project to help dentists manage their clinic
 authors = ["M <m@mathsistor.com>", "Sika <sikabarca@gmail.com>"]
 
 [tool.poetry.dependencies]
-python = "^3.8"
+python = ">=3.6,<3.9"
 Django = "^3.0.6"
 psycopg2-binary = "^2.8.5"
 dj-database-url = "^0.5.0"
@@ -20,6 +20,7 @@ boto3 = "^1.13.11"
 django-phonenumber-field = {extras = ["phonenumberslite"], version = "^4.0.0"}
 drf-yasg = "^1.17.1"
 djangorestframework-camel-case = "^1.1.2"
+djangorestframework-simplejwt = "^4.4.0"
 
 [tool.poetry.dev-dependencies]
 pytest-django = "^3.9.0"
