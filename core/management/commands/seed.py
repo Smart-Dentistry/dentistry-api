@@ -1,5 +1,6 @@
 from django.core.management.base import BaseCommand, CommandError
 from core.factories import UserFactory, MalePatientFactory, FemalePatientFactory
+from medical_records.constants import DISEASES
 
 DEVS = [
     {"username": "m", "email": "m@mathsistor.com"},
@@ -22,8 +23,8 @@ class Command(BaseCommand):
             male = MalePatientFactory()
             FemalePatientFactory()
         male.address = {
-            "province": "Azuay",
-            "city": "Cuenca",
+            "province": "1",
+            "canton": "3",
             "address_line": "Gringolandia",
         }
         male.emergency_contact = {
@@ -37,8 +38,8 @@ class Command(BaseCommand):
         }
         male.family_history = {
             "diseases": [
-                {"id": 1, "relatives": [1, 2, 3]},
-                {"id": 2, "relatives": [4, 6]},
+                {"id": 1, "label": DISEASES[0]['label'], "relatives": ['M', 'F', 'S']},
+                {"id": 2, "label": DISEASES[1]['label'], "relatives": ['MGF', 'FGM']},
             ],
             "observations": "This is a great patient.",
         }
@@ -47,8 +48,18 @@ class Command(BaseCommand):
             "observations": "No acute diseases.",
         }
         male.general_practitioners = [
-            {"disease": "Lupus", "name": "Greg House", "phone": "+5932456756"},
-            {"disease": "COVID-19", "name": "Jim Morrison", "phone": "+59333333"},
+            {
+                "specialization": "Cardiologist",
+                "name": "Greg House",
+                "phone": "+5932456756",
+                "observations": "A cool jerk!"
+                },
+            {
+                "specialization": "Neurologist",
+                "name": "Jim Morrison",
+                "phone": "+59333333",
+                "observations": "No idea bout this guy."
+            },
         ]
         male.save()
 
