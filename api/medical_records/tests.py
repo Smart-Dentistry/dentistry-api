@@ -90,7 +90,7 @@ def test_value_label_serializer_has_expected_fields():
     assert set(data.keys()) == {"value", "label"}
 
 
-@pytest.skip
+@pytest.mark.skip(reason='Too expensive to test')
 def test_province_cantons_returns_400_when_no_province(api_client):
     """Tests that 400 response is returned when no province for province_key"""
     url = reverse("cantons_by_province", kwargs={"province_key": 50})
@@ -99,7 +99,7 @@ def test_province_cantons_returns_400_when_no_province(api_client):
     assert response.status_code == HTTP_400_BAD_REQUEST
 
 
-@pytest.skip
+@pytest.mark.skip(reason='Too expensive to test')
 def test_provice_cantons_are_returned_successfully(api_client):
     """Test that 200 response and cants are returned when province exists"""
     url = reverse("cantons_by_province", kwargs={"province_key": 9})
