@@ -170,6 +170,9 @@ NOTEBOOK_ARGUMENTS = ["--ip", "0.0.0.0", "--port", "8888", "--allow-root"]
 
 # Set up djangorestframework-camel-case
 REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
