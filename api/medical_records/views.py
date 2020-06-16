@@ -1,20 +1,14 @@
 from rest_framework import viewsets
 from rest_framework.decorators import api_view
-from rest_framework.generics import ListAPIView
 from rest_framework.response import Response
 from rest_framework.status import HTTP_400_BAD_REQUEST
 from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
 
 
-from .serializers import PatientTableSerializer, PatientSerializer, ValueLabelSerializer
+from .serializers import PatientSerializer, ValueLabelSerializer
 from medical_records.models import Patient
 from medical_records.constants import PROVINCES_OF_ECUADOR, CANTONS_OF_ECUADOR, DISEASES
-
-
-class PatientTableList(ListAPIView):
-    queryset = Patient.objects.all()
-    serializer_class = PatientTableSerializer
 
 
 class PatientViewSet(viewsets.ModelViewSet):

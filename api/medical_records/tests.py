@@ -10,7 +10,6 @@ import pytest
 from core.factories import MalePatientFactory
 from .serializers import (
     PatientSerializer,
-    PatientTableSerializer,
     ValueLabelSerializer,
 )
 
@@ -43,6 +42,7 @@ def test_patient_serializer_has_expected_fields():
         "address",
         "phone",
         "whatsapp",
+        "whatsapp_link",
         "health_insurance_company",
         "email",
         "receive_promos",
@@ -57,51 +57,32 @@ def test_patient_serializer_has_expected_fields():
 
 
 @pytest.mark.django_db
-def test_patient_table_serializer_has_expected_fields():
-    """Test that PatientTableSerializer has expected fields"""
-    patient = MalePatientFactory()
-    serializer = PatientTableSerializer(patient)
-    data = serializer.data
-    assert set(data.keys()) == {
-        "key",
-        "profile_picture_url",
-        "first_name",
-        "last_name",
-        "id_document_number",
-        "phone",
-        "whatsapp",
-        "whatsapp_link",
-        "age",
-    }
-
-
-@pytest.mark.django_db
 def test_patient_table_serializer_age(mocker):
-    """Test that PatientTableSerializer returns correct value for age"""
+    """Test that PatientSerializer returns correct value for age"""
     now_mock = mocker.patch("django.utils.timezone.now")
     now_mock.return_value = make_aware(
         datetime.datetime.strptime("2020-02-01", "%Y-%m-%d")
     )
     patient = MalePatientFactory(birthdate=datetime.date(2010, 1, 1))
-    serializer = PatientTableSerializer(patient)
+    serializer = PatientSerializer(patient)
     assert serializer.data["age"] == 10
 
 
 @pytest.mark.django_db
 def test_patient_table_serializer_whatsapp_link():
-    """Test that PatientTableSerializer returns correct value for whatsapp_link
+    """Test that PatientSerializer returns correct value for whatsapp_link
     when whatsapp is True"""
     patient = MalePatientFactory(phone='+13053991321', whatsapp=True)
-    serializer = PatientTableSerializer(patient)
+    serializer = PatientSerializer(patient)
     assert serializer.data["whatsapp_link"] == 'https://wa.me/13053991321'
 
 
 @pytest.mark.django_db
 def test_patient_table_serializer_whatsapp_link_no_whatsapp():
-    """Test that PatientTableSerializer returns correct value for whatsapp_link
+    """Test that PatientSerializer returns correct value for whatsapp_link
     when whatsapp is False"""
     patient = MalePatientFactory(phone='+13053991321', whatsapp=False)
-    serializer = PatientTableSerializer(patient)
+    serializer = PatientSerializer(patient)
     assert serializer.data["whatsapp_link"] is None
 
 
