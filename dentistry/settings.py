@@ -24,7 +24,9 @@ env = environ.Env(
     AWS_STORAGE_BUCKET_NAME=(str, 'silly-bucket'),
     AWS_ACCESS_KEY_ID=(str, 'silly-key'),
     AWS_SECRET_ACCESS_KEY=(str, 'silly-secret'),
-    AWS_S3_REGION_NAME=(str, 'us-east-1')
+    AWS_S3_REGION_NAME=(str, 'us-east-1'),
+    API_URL=(str, 'http://localhost:8000/api'),
+    WEB_APP_URL=(str, 'http://localhost:3000')
 )
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -41,6 +43,8 @@ SECRET_KEY = env('SECRET_KEY')
 DEBUG = env('DEBUG')
 
 ALLOWED_HOSTS = env.list('ALLOWED_HOSTS')
+API_URL = env('API_URL')
+WEB_APP_URL = env('WEB_APP_URL')
 
 
 # Application definition
@@ -57,6 +61,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_extensions',
     'rest_framework',
+    'django_rest_passwordreset',
     'corsheaders',
     'storages',
     'phonenumber_field',
@@ -186,3 +191,12 @@ REST_FRAMEWORK = {
         'djangorestframework_camel_case.parser.CamelCaseJSONParser',
     ),
 }
+
+# SendGrid
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_HOST_USER = 'apikey'
+EMAIL_HOST_PASSWORD = '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'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+DEFAULT_FROM_EMAIL = 'm@mathsistor.com'
