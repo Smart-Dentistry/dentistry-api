@@ -24,7 +24,9 @@ env = environ.Env(
     AWS_STORAGE_BUCKET_NAME=(str, 'silly-bucket'),
     AWS_ACCESS_KEY_ID=(str, 'silly-key'),
     AWS_SECRET_ACCESS_KEY=(str, 'silly-secret'),
-    AWS_S3_REGION_NAME=(str, 'us-east-1')
+    AWS_S3_REGION_NAME=(str, 'us-east-1'),
+    API_URL=(str, 'http://localhost:8000/api'),
+    WEB_APP_URL=(str, 'http://localhost:3000')
 )
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -41,6 +43,8 @@ SECRET_KEY = env('SECRET_KEY')
 DEBUG = env('DEBUG')
 
 ALLOWED_HOSTS = env.list('ALLOWED_HOSTS')
+API_URL = env('API_URL')
+WEB_APP_URL = env('WEB_APP_URL')
 
 
 # Application definition

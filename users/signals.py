@@ -1,15 +1,13 @@
-from django.core.mail import EmailMultiAlternatives
-from django.dispatch import receiver
-from django.template.loader import render_to_string
-from django.urls import reverse
-
-from django_rest_passwordreset.signals import reset_password_token_created
-from django.core.mail import send_mail
 from django.conf import settings
+from django.core.mail import send_mail
+from django.dispatch import receiver
+from django_rest_passwordreset.signals import reset_password_token_created
 
 
 @receiver(reset_password_token_created)
-def password_reset_token_created(sender, instance, reset_password_token, *args, **kwargs):
+def password_reset_token_created(
+    sender, instance, reset_password_token, *args, **kwargs
+):
     """
     Handles password reset tokens
     When a token is created, an e-mail needs to be sent to the user
@@ -20,37 +18,20 @@ def password_reset_token_created(sender, instance, reset_password_token, *args, 
     :param kwargs:
     :return:
     """
-    # send an e-mail to the user
-    # context = {
-    #     'current_user': reset_password_token.user,
-    #     'username': reset_password_token.user.username,
-    #     'email': reset_password_token.user.email,
-    #     'reset_password_url': "{}?token={}".format(reverse('password_reset:reset-password-request'), reset_password_token.key)
-    # }
-
-    # render email text
-    # email_html_message = render_to_string('users/user_reset_password.html', context)
-    # email_plaintext_message = render_to_string('users/user_reset_password.txt', context)
-
-    # msg = EmailMultiAlternatives(
-    #     # title:
-    #     "Password Reset for {title}".format(title="Some website title"),
-    #     # message:
-    #     email_plaintext_message,
-    #     # from:
-    #     "noreply@somehost.local",
-    #     # to:
-    #     [reset_password_token.user.email]
-    # )
-    # msg.attach_alternative(email_html_message, "text/html")
-    # msg.send()
     send_mail(
-        'Dentistrify - Reset password',
-        """This is the message you want to send
-        http://localhost:3000/confirm-reset-password/TOKEN
+        "Dentistrify - Reset Password",
+        f"""It seems you forgot your password, no problem! Just click the button below to create a new one.
+
+{settings.WEB_APP_URL}/reset-password-confirm/{reset_password_token.key}
+
+The link is valid for 24 hours.
+
+If you did not request to reset your password, please ignore this message.
+
+Thanks
+
+Dentistrify Team
         """,
         settings.DEFAULT_FROM_EMAIL,
-        [
-            reset_password_token.user.email
-        ]
+        [reset_password_token.user.email],
     )
