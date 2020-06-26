@@ -20,7 +20,7 @@ def password_reset_token_created(
     """
     send_mail(
         "Dentistrify - Reset Password",
-        f"""It seems you forgot your password, no problem! Just click the button below to create a new one.
+        f"""It seems you forgot your password, no problem! Just click the link below to create a new one.
 
 {settings.WEB_APP_URL}/reset-password-confirm/{reset_password_token.key}
 
