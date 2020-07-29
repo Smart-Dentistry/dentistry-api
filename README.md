@@ -105,6 +105,18 @@ docker image rm <image_name>
 docker-compose exec app bash
 ```
 
+#### Seed database
+
+```bash
+docker-compose exec app seed
+```
+
+#### Clear database (keep migrations' table)
+
+```bash
+docker-compose exec app flush --no-input
+```
+
 #### Start Django shell
 
 ```bash
