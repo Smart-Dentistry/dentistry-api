@@ -12,7 +12,7 @@ services:
       - 8000:8000
       - 8888:8888
     env_file:
-      - ./.env.dev
+      - ./.env.app
     depends_on:
       - db
   db:
@@ -22,11 +22,8 @@ services:
       - postgres_data:/var/lib/postgresql/data/
     ports:
       - 5432:5432
-    environment:
-      - POSTGRES_USER=user
-      - POSTGRES_PASSWORD=user
-      - POSTGRES_DB=dentistry
+    env_file:
+      - ./.env.db
 
 volumes:
   postgres_data:
-
