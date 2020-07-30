@@ -1,7 +1,7 @@
 **/__pycache__
 **/.classpath
 **/.dockerignore
-**/.env
+**/.env*
 **/.git
 **/.gitignore
 **/.project
@@ -22,5 +22,12 @@
 **/obj
 **/secrets.dev.yaml
 **/values.dev.yaml
-.ipynb_checkpoints/
-README.md
+**/.circleci
+**/.ipynb_checkpoints
+**/.mypy_cache
+**/.pytest_cache
+**/.coverage
+**/.pre-commit-config.yaml
+**/heroku.yml
+**/README.md
+**/*.egg-info
