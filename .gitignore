@@ -180,3 +180,7 @@ dmypy.json
 
 # jupyter
 .ipynb_checkpoints
+.gitsecret/keys/random_seed
+!*.secret
+.env.db
+.env.app
