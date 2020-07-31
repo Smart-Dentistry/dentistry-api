@@ -4,6 +4,7 @@ from django.urls import reverse
 from django.utils.timezone import make_aware
 from rest_framework.status import HTTP_400_BAD_REQUEST, HTTP_200_OK
 from rest_framework.test import APIClient
+from rest_framework_simplejwt.tokens import RefreshToken
 
 import pytest
 
@@ -12,9 +13,13 @@ from .serializers import PatientSerializer, ValueLabelSerializer
 
 
 @pytest.fixture
-def api_client():
-    """A fixture for an APIClient"""
-    return APIClient()
+def api_client(admin_user):
+    """A fixture for an APIClient with JWT token"""
+    client = APIClient()
+    refresh = RefreshToken.for_user(admin_user)
+    client.credentials(HTTP_AUTHORIZATION=f'Bearer {refresh.access_token}')
+
+    return client
 
 
 @pytest.mark.django_db
@@ -90,7 +95,6 @@ def test_value_label_serializer_has_expected_fields():
     assert set(data.keys()) == {"value", "label"}
 
 
-@pytest.mark.skip(reason='Too expensive to test')
 def test_province_cantons_returns_400_when_no_province(api_client):
     """Tests that 400 response is returned when no province for province_key"""
     url = reverse("cantons_by_province", kwargs={"province_key": 50})
@@ -99,9 +103,8 @@ def test_province_cantons_returns_400_when_no_province(api_client):
     assert response.status_code == HTTP_400_BAD_REQUEST
 
 
-@pytest.mark.skip(reason='Too expensive to test')
 def test_provice_cantons_are_returned_successfully(api_client):
-    """Test that 200 response and cants are returned when province exists"""
+    """Test that 200 response and cantons are returned when province exists"""
     url = reverse("cantons_by_province", kwargs={"province_key": 9})
     response = api_client.get(url)
     data = response.data
@@ -112,3 +115,25 @@ def test_provice_cantons_are_returned_successfully(api_client):
         {"value": 75, "label": "San Cristóbal"},
         {"value": 76, "label": "Santa Cruz"},
     ]
+
+
+def test_provices_are_returned_successfully(api_client):
+    """Test that 200 response and provinces are returned"""
+    url = reverse("provinces_of_ecuador")
+    response = api_client.get(url)
+    data = response.data
+
+    assert response.status_code == HTTP_200_OK
+    assert {"value": 8, "label": "Esmeraldas"} in data
+    assert {"value": 9, "label": "Galápagos"} in data
+
+
+def test_diseases_are_returned_successfully(api_client):
+    """Test that 200 response and diseases are returned"""
+    url = reverse("diseases")
+    response = api_client.get(url)
+    data = response.data
+
+    assert response.status_code == HTTP_200_OK
+    assert {"value": 2, "label": "Hypertension"} in data
+    assert {"value": 3, "label": "Cardiovascular disease"} in data
