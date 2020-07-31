@@ -187,6 +187,14 @@ docker-compose exec app coverage html
 You will be able to open up the report at `htmlcov/index.html`
 using your favorite browser.
 
+### Generate test coverage shield badge (run tests before)
+
+```bash
+docker-compose exec app coverage-badge -f -o coverage.svg
+```
+
+This will generate a file `coverage.svg` at the root directory of this project.
+
 ### db service
 
 #### Start bash session in postgres container
