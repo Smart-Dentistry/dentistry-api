@@ -65,7 +65,7 @@ docker-compose up
 
 You can populate the database by running the following command:
 
-```python
+```bash
 docker-compose exec app python manage.py seed
 ```
 
@@ -137,7 +137,7 @@ docker image ls
 #### Remove image
 
 ```bash
-docker image rm <image_name>
+docker image rm dentistry_app
 ```
 
 ### app service
@@ -171,6 +171,15 @@ docker-compose exec app python manage.py shell
 ```bash
 docker-compose exec app pytest
 ```
+
+### Genete test coverage report (run test before)
+
+```bash
+docker-compose exec app coverage html
+```
+
+You will be able to open up the report at `htmlcov/index.html`
+using your favorite browser.
 
 ### db service
 
