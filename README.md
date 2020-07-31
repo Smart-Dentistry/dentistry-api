@@ -55,6 +55,15 @@ docker-compose exec app python manage.py seed
 
 You are all set 🎉. Navigate to http://localhost:8000/admin/ to see Django's admin login page.
 
+## Adding a new developer
+
+If you are a new developer joining the project,
+create a new branch called `new-dev-[username]` and
+add yourself as a dict element (`username` and `email`) at the end of the `DEVS` list located at [seed.py][].
+(see existing elements in `DEVS`)
+
+Once you have added yourself, commit the changes, push the branch, and create a pull request.
+
 ## pre-commit and pre-push
 
 [pre-commit][] is used in order to run some hooks and automate some tasks such as formatting files before committing and running tests before commiting and pushing. Make sure you have [installed pre-commit][install-precommit].
@@ -165,3 +174,4 @@ docker-compose exec db bash
 [pre-commit]: https://pre-commit.com
 [pre-commit-file]: .pre-commit-config.yaml
 [python]: https://www.python.org
+[seed.py]: ./core/management/commands/seed.py
