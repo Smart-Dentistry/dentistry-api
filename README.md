@@ -1,5 +1,11 @@
 # Dentistry API
 
+[![Smart-Dentistry](https://circleci.com/gh/Smart-Dentistry/dentistry-api.svg?style=shield&circle-token=765b608e6af0871ef87ff07ef137c02c133b2640)](https://circleci.com/gh/Smart-Dentistry/dentistry-api.svg?style=shield&circle-token=765b608e6af0871ef87ff07ef137c02c133b2640)
+[![python](https://upload.wikimedia.org/wikipedia/commons/a/a5/Blue_Python_3.8_Shield_Badge.svg)](https://www.python.org/)
+[![coverage](./coverage.svg)](./coverage.svg)
+[![PostgreSQL](https://badgen.net/badge/icon/postgresql?icon=postgresql&label)](https://badgen.net/badge/icon/postgresql?icon=postgresql&label)
+[![Docker](https://badgen.net/badge/icon/docker?icon=docker&label)](https://badgen.net/badge/icon/docker?icon=docker&label)
+
 This is an API to help dentists manage their clinics.
 
 ## Technologies
