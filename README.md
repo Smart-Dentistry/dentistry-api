@@ -1,7 +1,17 @@
 # Dentistry API
 
-This is an API implemented using [Django][] and [Django Rest Framework][] which goal
-is to help dentists manage their clinics.
+This is an API to help dentists manage their clinics.
+
+## Technologies
+
+The main technologies used in this project are:
+
+* [Docker][]
+* [PostgreSQL][] (container)
+* [Python 3][python] (container)
+* [poetry][]
+* [Django][]
+* [Django REST Framework][DRF]
 
 ## Getting Started
 
@@ -35,7 +45,15 @@ Start containers:
 docker-compose up
 ```
 
-You are all set 🎉. Navigate to http://localhost:8000/ to see Django's success page.
+### Seed database (recommended)
+
+You can populate the database by running the following command:
+
+```python
+docker-compose exec app python manage.py seed
+```
+
+You are all set 🎉. Navigate to http://localhost:8000/admin/ to see Django's admin login page.
 
 ## pre-commit and pre-push
 
@@ -138,9 +156,12 @@ docker-compose exec db bash
 ```
 
 [Django]: https://www.djangoproject.com/
-[Django Rest Framework]: https://www.django-rest-framework.org/
-[Docker]: https://docs.docker.com/get-docker/
+[DRF]: https://www.django-rest-framework.org/
+[Docker]: https://www.docker.com
 [Git]: https://git-scm.com/downloads
 [install-precommit]: https://pre-commit.com/#install
+[poetry]: https://python-poetry.org
+[PostgreSQL]: https://www.postgresql.org
 [pre-commit]: https://pre-commit.com
 [pre-commit-file]: .pre-commit-config.yaml
+[python]: https://www.python.org
