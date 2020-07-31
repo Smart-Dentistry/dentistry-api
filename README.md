@@ -1,7 +1,23 @@
 # Dentistry API
 
-This is an API implemented using [Django][] and [Django Rest Framework][] which goal
-is to help dentists manage their clinics.
+[![Smart-Dentistry](https://circleci.com/gh/Smart-Dentistry/dentistry-api.svg?style=shield&circle-token=765b608e6af0871ef87ff07ef137c02c133b2640)](https://circleci.com/gh/Smart-Dentistry/dentistry-api.svg?style=shield&circle-token=765b608e6af0871ef87ff07ef137c02c133b2640)
+[![coverage](./coverage.svg)](./coverage.svg)
+[![python](https://upload.wikimedia.org/wikipedia/commons/a/a5/Blue_Python_3.8_Shield_Badge.svg)](https://www.python.org/)
+[![PostgreSQL](https://badgen.net/badge/icon/postgresql?icon=postgresql&label)](https://badgen.net/badge/icon/postgresql?icon=postgresql&label)
+[![Docker](https://badgen.net/badge/icon/docker?icon=docker&label)](https://badgen.net/badge/icon/docker?icon=docker&label)
+
+This is an API to help dentists manage their clinics.
+
+## Technologies
+
+The main technologies used in this project are:
+
+* [Docker][]
+* [PostgreSQL][] (container)
+* [Python 3][python] (container)
+* [poetry][]
+* [Django][]
+* [Django REST Framework][DRF]
 
 ## Getting Started
 
@@ -11,13 +27,29 @@ These instructions will get you a copy of the project up and running on your loc
 
 It is assumed you have installed [Git][] and [Docker][] in your machine.
 
-### Cloning repository
+### Creating a gpg RSA key-pair
 
-Clone this repo and navigate inside its root directory:
+Install [git-secret][] and [create a gpg RSA key-pair][create-gpg-key].
+Send your `public-key.gpg` file to a developer and ask him to
+add you to this repository using git-secret.
+
+### Cloning repository (depends on previous step)
+
+Once you have confirmed that you have been included in the repo using git-secret, clone this repo and navigate inside its root directory:
 
 ```bash
 git clone https://github.com/Smart-Dentistry/dentistry-api.git && cd dentistry-api
 ```
+
+### Decrypting secrets
+
+Decrypt the secret files by running the following command:
+
+```python
+git secret reveal
+```
+
+The previous command will decript two files `.env.app` and `.env.db` which contain environment variables with keys and secrets for configuration.
 
 ### Building containers
 
@@ -35,7 +67,24 @@ Start containers:
 docker-compose up
 ```
 
-You are all set 🎉. Navigate to http://localhost:8000/ to see Django's success page.
+### Seed database (recommended)
+
+You can populate the database by running the following command:
+
+```bash
+docker-compose exec app python manage.py seed
+```
+
+You are all set 🎉. Navigate to http://localhost:8000/admin/ to see Django's admin login page.
+
+## Adding a new developer
+
+If you are a new developer joining the project,
+create a new branch called `new-dev-[username]` and
+add yourself as a dict element (`username` and `email`) at the end of the `DEVS` list located at [seed.py][].
+(see existing elements in `DEVS`)
+
+Once you have added yourself, commit the changes, push the branch, and create a pull request.
 
 ## pre-commit and pre-push
 
@@ -94,7 +143,7 @@ docker image ls
 #### Remove image
 
 ```bash
-docker image rm <image_name>
+docker image rm dentistry_app
 ```
 
 ### app service
@@ -129,6 +178,15 @@ docker-compose exec app python manage.py shell
 docker-compose exec app pytest
 ```
 
+### Genete test coverage report (run test before)
+
+```bash
+docker-compose exec app coverage html
+```
+
+You will be able to open up the report at `htmlcov/index.html`
+using your favorite browser.
+
 ### db service
 
 #### Start bash session in postgres container
@@ -137,10 +195,23 @@ docker-compose exec app pytest
 docker-compose exec db bash
 ```
 
+## License
+
+Copyright © 2020, [Mathsistor][], All Rights Reserved.
+Unauthorized copying of this file, via any medium is strictly prohibited.
+
+
+[create-gpg-key]: https://git-secret.io/#using-gpg
 [Django]: https://www.djangoproject.com/
-[Django Rest Framework]: https://www.django-rest-framework.org/
-[Docker]: https://docs.docker.com/get-docker/
+[DRF]: https://www.django-rest-framework.org/
+[Docker]: https://www.docker.com
 [Git]: https://git-scm.com/downloads
+[git-secret]: https://git-secret.io/
 [install-precommit]: https://pre-commit.com/#install
+[Mathsistor]: http://mathsistor.com/
+[poetry]: https://python-poetry.org
+[PostgreSQL]: https://www.postgresql.org
 [pre-commit]: https://pre-commit.com
 [pre-commit-file]: .pre-commit-config.yaml
+[python]: https://www.python.org
+[seed.py]: ./core/management/commands/seed.py
