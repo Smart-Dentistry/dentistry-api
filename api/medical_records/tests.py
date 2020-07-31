@@ -115,3 +115,25 @@ def test_provice_cantons_are_returned_successfully(api_client):
         {"value": 75, "label": "San Cristóbal"},
         {"value": 76, "label": "Santa Cruz"},
     ]
+
+
+def test_provices_are_returned_successfully(api_client):
+    """Test that 200 response and provinces are returned"""
+    url = reverse("provinces_of_ecuador")
+    response = api_client.get(url)
+    data = response.data
+
+    assert response.status_code == HTTP_200_OK
+    assert {"value": 8, "label": "Esmeraldas"} in data
+    assert {"value": 9, "label": "Galápagos"} in data
+
+
+def test_diseases_are_returned_successfully(api_client):
+    """Test that 200 response and diseases are returned"""
+    url = reverse("diseases")
+    response = api_client.get(url)
+    data = response.data
+
+    assert response.status_code == HTTP_200_OK
+    assert {"value": 2, "label": "Hypertension"} in data
+    assert {"value": 3, "label": "Cardiovascular disease"} in data
