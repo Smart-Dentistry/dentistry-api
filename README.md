@@ -21,13 +21,29 @@ These instructions will get you a copy of the project up and running on your loc
 
 It is assumed you have installed [Git][] and [Docker][] in your machine.
 
-### Cloning repository
+### Creating a gpg RSA key-pair
 
-Clone this repo and navigate inside its root directory:
+Install [git-secret][] and [create a gpg RSA key-pair][create-gpg-key].
+Send your `public-key.gpg` file to a developer and ask him to
+add you to this repository using git-secret.
+
+### Cloning repository (depends on previous step)
+
+Once you have confirmed that you have been included in the repo using git-secret, clone this repo and navigate inside its root directory:
 
 ```bash
 git clone https://github.com/Smart-Dentistry/dentistry-api.git && cd dentistry-api
 ```
+
+### Decrypting secrets
+
+Decrypt the secret files by running the following command:
+
+```python
+git secret reveal
+```
+
+The previous command will decript two files `.env.app` and `.env.db` which contain environment variables with keys and secrets for configuration.
 
 ### Building containers
 
@@ -164,10 +180,12 @@ docker-compose exec app pytest
 docker-compose exec db bash
 ```
 
+[create-gpg-key]: https://git-secret.io/#using-gpg
 [Django]: https://www.djangoproject.com/
 [DRF]: https://www.django-rest-framework.org/
 [Docker]: https://www.docker.com
 [Git]: https://git-scm.com/downloads
+[git-secret]: https://git-secret.io/
 [install-precommit]: https://pre-commit.com/#install
 [poetry]: https://python-poetry.org
 [PostgreSQL]: https://www.postgresql.org
