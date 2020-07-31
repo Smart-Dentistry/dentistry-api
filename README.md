@@ -189,6 +189,12 @@ using your favorite browser.
 docker-compose exec db bash
 ```
 
+## License
+
+Copyright © 2020, [Mathsistor][], All Rights Reserved.
+Unauthorized copying of this file, via any medium is strictly prohibited.
+
+
 [create-gpg-key]: https://git-secret.io/#using-gpg
 [Django]: https://www.djangoproject.com/
 [DRF]: https://www.django-rest-framework.org/
@@ -196,6 +202,7 @@ docker-compose exec db bash
 [Git]: https://git-scm.com/downloads
 [git-secret]: https://git-secret.io/
 [install-precommit]: https://pre-commit.com/#install
+[Mathsistor]: http://mathsistor.com/
 [poetry]: https://python-poetry.org
 [PostgreSQL]: https://www.postgresql.org
 [pre-commit]: https://pre-commit.com
