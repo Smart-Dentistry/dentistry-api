@@ -12,6 +12,7 @@ class Patient(TimeStampedModel):
     last_name = models.CharField(max_length=50)
     second_last_name = models.CharField(max_length=50, blank=True)
     id_document_number = models.CharField(max_length=25)
+    first_appointment_reason = models.TextField(default="", blank=True)
 
     class Sex(models.TextChoices):
         MALE = "M", "Male"
