@@ -78,3 +78,6 @@ class MedicalBackground(TimeStampedModel):
     general_practitioners = JSONField(blank=True, null=True)
     drinker = models.BooleanField(default=False)
     smoker = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f'{self.patient.first_name} {self.patient.last_name}'
