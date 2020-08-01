@@ -103,15 +103,15 @@ class NonPathologicalBackground(TimeStampedModel):
         on_delete=models.CASCADE,
     )
 
-    class BrushingFrequencyChoices(models.TextChoices):
-        ZERO = "0", "0"
-        ONE = "1", "1"
-        TWO = "2", "2"
-        THREE = "3", "3"
-        MORE = "M", "More"
+    class BrushingFrequencyChoices(models.IntegerChoices):
+        ZERO = 0
+        ONE = 1
+        TWO = 2
+        THREE = 3
+        MORE = 4
 
-    brushing_frequency = models.CharField(
-        max_length=1, choices=BrushingFrequencyChoices.choices, blank=True
+    brushing_frequency = models.IntegerField(
+        choices=BrushingFrequencyChoices.choices, blank=True
     )
     mouthwash = models.BooleanField(default=False)
     floss = models.BooleanField(default=False)
