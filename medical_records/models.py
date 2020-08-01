@@ -80,4 +80,4 @@ class MedicalBackground(TimeStampedModel):
     smoker = models.BooleanField(default=False)
 
     def __str__(self):
-        return f'{self.patient.first_name} {self.patient.last_name}'
+        return str(self.patient)
