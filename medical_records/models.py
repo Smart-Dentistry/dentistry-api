@@ -81,3 +81,14 @@ class MedicalBackground(TimeStampedModel):
 
     def __str__(self):
         return str(self.patient)
+
+
+class PeriodontalExam(TimeStampedModel):
+    patient = models.OneToOneField(
+        Patient,
+        on_delete=models.CASCADE,
+    )
+    dental_plaque = models.BooleanField(default=False)
+    calculus = models.BooleanField(default=False)
+    bleeding = models.BooleanField(default=False)
+    tooth_mobility = models.BooleanField(default=False)
