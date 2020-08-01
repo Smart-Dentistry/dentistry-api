@@ -95,3 +95,26 @@ class PeriodontalExam(TimeStampedModel):
 
     def __str__(self):
         return str(self.patient)
+
+
+class NonPathologicalBackground(TimeStampedModel):
+    patient = models.OneToOneField(
+        Patient,
+        on_delete=models.CASCADE,
+    )
+
+    class BrushingFrequencyChoices(models.IntegerChoices):
+        ZERO = 0
+        ONE = 1
+        TWO = 2
+        THREE = 3
+        MORE = 4
+
+    brushing_frequency = models.IntegerField(
+        choices=BrushingFrequencyChoices.choices, blank=True, null=True
+    )
+    mouthwash = models.BooleanField(default=False)
+    floss = models.BooleanField(default=False)
+
+    def __str__(self):
+        return str(self.patient)
