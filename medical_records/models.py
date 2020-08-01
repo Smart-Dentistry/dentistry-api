@@ -66,3 +66,15 @@ class Patient(TimeStampedModel):
 
     def __str__(self):
         return f'{self.first_name} {self.last_name}'
+
+
+class MedicalBackground(TimeStampedModel):
+    patient = models.OneToOneField(
+        Patient,
+        on_delete=models.CASCADE,
+    )
+    family_history = JSONField(blank=True, null=True)
+    personal_history = JSONField(blank=True, null=True)
+    general_practitioners = JSONField(blank=True, null=True)
+    drinker = models.BooleanField(default=False)
+    smoker = models.BooleanField(default=False)
