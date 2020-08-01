@@ -92,3 +92,6 @@ class PeriodontalExam(TimeStampedModel):
     calculus = models.BooleanField(default=False)
     bleeding = models.BooleanField(default=False)
     tooth_mobility = models.BooleanField(default=False)
+
+    def __str__(self):
+        return str(self.patient)
