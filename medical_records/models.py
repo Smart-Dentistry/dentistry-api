@@ -111,7 +111,7 @@ class NonPathologicalBackground(TimeStampedModel):
         MORE = 4
 
     brushing_frequency = models.IntegerField(
-        choices=BrushingFrequencyChoices.choices, blank=True
+        choices=BrushingFrequencyChoices.choices, blank=True, null=True
     )
     mouthwash = models.BooleanField(default=False)
     floss = models.BooleanField(default=False)
