@@ -118,3 +118,15 @@ class NonPathologicalBackground(TimeStampedModel):
 
     def __str__(self):
         return str(self.patient)
+
+
+class ClinicalExam(TimeStampedModel):
+    patient = models.OneToOneField(
+        Patient,
+        on_delete=models.CASCADE,
+    )
+    intraoral_exam = models.TextField(blank=True)
+    extraoral_exam = models.TextField(blank=True)
+
+    def __str__(self):
+        return str(self.patient)
