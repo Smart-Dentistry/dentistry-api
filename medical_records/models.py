@@ -75,8 +75,6 @@ class MedicalBackground(TimeStampedModel):
     family_history = JSONField(blank=True, null=True)
     personal_history = JSONField(blank=True, null=True)
     general_practitioners = JSONField(blank=True, null=True)
-    drinker = models.BooleanField(default=False)
-    smoker = models.BooleanField(default=False)
 
     def __str__(self):
         return str(self.patient)
