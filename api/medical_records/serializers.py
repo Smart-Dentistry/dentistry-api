@@ -48,9 +48,6 @@ class PatientSerializer(serializers.ModelSerializer):
             "referral_source",
             "emergency_contact",
             "representative",
-            "family_history",
-            "personal_history",
-            "general_practitioners",
             "age",
         ]
 

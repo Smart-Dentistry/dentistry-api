@@ -60,9 +60,6 @@ class Patient(TimeStampedModel):
     )
     emergency_contact = JSONField(blank=True, null=True)
     representative = JSONField(blank=True, null=True)
-    family_history = JSONField(blank=True, null=True)
-    personal_history = JSONField(blank=True, null=True)
-    general_practitioners = JSONField(blank=True, null=True)
 
     def __str__(self):
         return f'{self.first_name} {self.last_name}'
@@ -72,6 +69,8 @@ class MedicalBackground(TimeStampedModel):
     patient = models.OneToOneField(
         Patient,
         on_delete=models.CASCADE,
+        related_name="medical_background",
+        related_query_name="medical_background",
     )
     family_history = JSONField(blank=True, null=True)
     personal_history = JSONField(blank=True, null=True)
