@@ -72,6 +72,8 @@ class MedicalBackground(TimeStampedModel):
     patient = models.OneToOneField(
         Patient,
         on_delete=models.CASCADE,
+        related_name="medical_background",
+        related_query_name="medical_background",
     )
     family_history = JSONField(blank=True, null=True)
     personal_history = JSONField(blank=True, null=True)
