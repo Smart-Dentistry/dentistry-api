@@ -1,6 +1,5 @@
 import datetime
 import string
-from typing import List
 
 from django.contrib.auth import get_user_model
 from django.conf import settings
@@ -43,9 +42,6 @@ class PatientFactory(factory.django.DjangoModelFactory):
     )
     email = factory.Faker("free_email")
     referral_source = FuzzyChoice(Patient.ReferralSourceChoices.values)
-    family_history = {"diseases": [], "observations": ""}
-    personal_history = {"diseases": [], "observations": ""}
-    general_practitioners: List = []
 
     class Meta:
         abstract = True

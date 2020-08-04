@@ -51,9 +51,6 @@ def test_patient_serializer_has_expected_fields():
         "referral_source",
         "emergency_contact",
         "representative",
-        "family_history",
-        "personal_history",
-        "general_practitioners",
         "age",
     }
 
