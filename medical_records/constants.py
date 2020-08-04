@@ -309,4 +309,6 @@ DISEASES = [
     {"value": 9, "label": "Hepatitis"},
     {"value": 10, "label": "Arthritis"},
     {"value": 11, "label": "Others"},
+    {"value": 12, "label": "Drinker"},
+    {"value": 13, "label": "Smoker"},
 ]
