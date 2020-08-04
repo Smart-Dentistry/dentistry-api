@@ -3,23 +3,11 @@ import datetime
 from django.urls import reverse
 from django.utils.timezone import make_aware
 from rest_framework.status import HTTP_400_BAD_REQUEST, HTTP_200_OK
-from rest_framework.test import APIClient
-from rest_framework_simplejwt.tokens import RefreshToken
 
 import pytest
 
 from core.factories import MalePatientFactory
 from .serializers import PatientSerializer, ValueLabelSerializer
-
-
-@pytest.fixture
-def api_client(admin_user):
-    """A fixture for an APIClient with JWT token"""
-    client = APIClient()
-    refresh = RefreshToken.for_user(admin_user)
-    client.credentials(HTTP_AUTHORIZATION=f'Bearer {refresh.access_token}')
-
-    return client
 
 
 @pytest.mark.django_db
