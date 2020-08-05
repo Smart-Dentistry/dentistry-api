@@ -2,6 +2,7 @@ from rest_framework import viewsets
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.status import HTTP_400_BAD_REQUEST
+from rest_framework import filters
 from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
 
@@ -14,6 +15,8 @@ from medical_records.constants import PROVINCES_OF_ECUADOR, CANTONS_OF_ECUADOR, 
 class PatientViewSet(viewsets.ModelViewSet):
     queryset = Patient.objects.all()
     serializer_class = PatientSerializer
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['first_name', 'last_name', 'id_document_number']
 
 
 @swagger_auto_schema(method="get", responses={200: ValueLabelSerializer(many=True)})
