@@ -5,7 +5,7 @@ description = "This is an API for a project to help dentists manage their clinic
 authors = ["M <m@mathsistor.com>", "Sika <sikabarca@gmail.com>"]
 
 [tool.poetry.dependencies]
-python = ">=3.6,<3.9"
+python = ">=3.7,<3.10"
 Django = "^3.0.6"
 psycopg2-binary = "^2.8.5"
 dj-database-url = "^0.5.0"
