@@ -84,6 +84,8 @@ class PeriodontalExam(TimeStampedModel):
     patient = models.OneToOneField(
         Patient,
         on_delete=models.CASCADE,
+        related_name="periodontal_exam",
+        related_query_name="periodontal_exam",
     )
     dental_plaque = models.BooleanField(default=False)
     calculus = models.BooleanField(default=False)
@@ -98,6 +100,8 @@ class NonPathologicalBackground(TimeStampedModel):
     patient = models.OneToOneField(
         Patient,
         on_delete=models.CASCADE,
+        related_name="non_pathological_background",
+        related_query_name="non_pathological_background",
     )
 
     class BrushingFrequencyChoices(models.IntegerChoices):
@@ -121,6 +125,8 @@ class ClinicalExam(TimeStampedModel):
     patient = models.OneToOneField(
         Patient,
         on_delete=models.CASCADE,
+        related_name="clinical_exam",
+        related_query_name="clinical_exam",
     )
     intraoral_exam = models.TextField(blank=True)
     extraoral_exam = models.TextField(blank=True)

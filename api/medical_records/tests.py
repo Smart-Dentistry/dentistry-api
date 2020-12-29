@@ -2,18 +2,23 @@ import datetime
 
 from django.urls import reverse
 from django.utils.timezone import make_aware
-from rest_framework.status import HTTP_400_BAD_REQUEST, HTTP_200_OK
+from rest_framework.status import HTTP_400_BAD_REQUEST, HTTP_200_OK, HTTP_201_CREATED
 
 import pytest
 
+from medical_records.models import PeriodontalExam
 from core.factories import MalePatientFactory
 from .serializers import PatientSerializer, ValueLabelSerializer
 
+@pytest.fixture
+def patient():
+    return MalePatientFactory()
+
+
 
 @pytest.mark.django_db
-def test_patient_serializer_has_expected_fields():
+def test_patient_serializer_has_expected_fields(patient):
     """Test that PatientSerializer has expected fields"""
-    patient = MalePatientFactory()
     serializer = PatientSerializer(patient)
     data = serializer.data
     assert set(data.keys()) == {
@@ -122,3 +127,68 @@ def test_diseases_are_returned_successfully(api_client):
     assert response.status_code == HTTP_200_OK
     assert {"value": 2, "label": "Hypertension"} in data
     assert {"value": 3, "label": "Cardiovascular disease"} in data
+
+
+@pytest.mark.django_db
+def test_patient_med_record_is_created_successfully(patient, api_client):
+    """Test that medical history for a patient is created successfully"""
+    url = reverse('patient-create-med-history', kwargs={"pk": patient.pk})
+    data = {
+        "appointmentReason": "This is silly",
+        "familyHistory": {
+            "diseases": [
+                {
+                    "id": 12,
+                    "label": "Drinker",
+                    "relatives": ["M", "F", "S"]
+            }
+        ],
+        "observations": "This is a good guy."
+        },
+        "personalHistory": {
+            "diseases": [1, 5],
+            "observations": "This doesn't look good."
+        },
+        "generalPractitioners": [
+            {
+                "name": "Luis M Vargas",
+                "phone": "+13053991321",
+                "specialization": "Scientist",
+                "observations": "This is a great guy."
+            }
+        ],
+        "clinicalExam": {
+            "extraoralExam": "ABCD",
+            "intraoralExam": "XYZ"
+        },
+        "periodontalExam": {
+            "dentalPlaque": True,
+            "calculus": False,
+            "bleeding": True,
+            "toothMobility": False
+        },
+        "nonPathologicalBackground": {
+            "mouthwash": True,
+            "floss": True,
+            "brushingFrequency": 3
+        }
+    }
+    response = api_client.post(url, data,  format='json')
+    patient.refresh_from_db()
+
+    assert response.status_code == HTTP_201_CREATED
+    assert hasattr(patient, 'medical_background')
+    assert hasattr(patient, 'periodontal_exam')
+    assert hasattr(patient, 'non_pathological_background')
+    assert hasattr(patient, 'clinical_exam')
+    
+
+@pytest.mark.django_db
+def test_patient_med_record_is_not_created_when_patient_already_has_it(patient, api_client):
+    """Test that medical history for a patient is not created when patient
+    already has medical history"""
+    PeriodontalExam.objects.create(patient=patient)
+    url = reverse('patient-create-med-history', kwargs={"pk": patient.pk})
+    response = api_client.post(url, {},  format='json')
+    
+    assert response.status_code == HTTP_400_BAD_REQUEST
