@@ -125,6 +125,8 @@ class ClinicalExam(TimeStampedModel):
     patient = models.OneToOneField(
         Patient,
         on_delete=models.CASCADE,
+        related_name="clinical_exam",
+        related_query_name="clinical_exam",
     )
     intraoral_exam = models.TextField(blank=True)
     extraoral_exam = models.TextField(blank=True)
