@@ -6,7 +6,7 @@
 [![PostgreSQL](https://badgen.net/badge/icon/postgresql?icon=postgresql&label)](https://badgen.net/badge/icon/postgresql?icon=postgresql&label)
 [![Docker](https://badgen.net/badge/icon/docker?icon=docker&label)](https://badgen.net/badge/icon/docker?icon=docker&label)
 
-This is an API to help dentists manage their clinics.
+This is an API to help dentists manage their clinics. This project could be used as a starting point and a guide for projects related to managing a clinic for dentists or medical practitioners.
 
 ## Technologies
 
