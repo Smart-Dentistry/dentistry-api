@@ -68,7 +68,7 @@ Once you have confirmed that you have been included in the repo using git-secret
 git clone https://github.com/Smart-Dentistry/dentistry-api.git && cd dentistry-api
 ```
 
-### Decrypting secrets
+### Decrypting secrets (skip if not using git-secret)
 
 Decrypt the secret files by running the following command:
 
