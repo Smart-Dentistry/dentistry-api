@@ -233,7 +233,7 @@ docker-compose exec db bash
 ## License
 
 Copyright © 2020, [Mathsistor][], All Rights Reserved.
-Unauthorized copying of this file, via any medium is strictly prohibited.
+Unauthorized copying of this file, via any medium is strictly prohibited. ([see license][license])
 
 
 [create-gpg-key]: https://git-secret.io/#using-gpg
@@ -243,6 +243,7 @@ Unauthorized copying of this file, via any medium is strictly prohibited.
 [Git]: https://git-scm.com/downloads
 [git-secret]: https://git-secret.io/
 [install-precommit]: https://pre-commit.com/#install
+[license]: ./LICENSE
 [Mathsistor]: http://mathsistor.com/
 [poetry]: https://python-poetry.org
 [PostgreSQL]: https://www.postgresql.org
