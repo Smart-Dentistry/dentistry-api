@@ -33,6 +33,33 @@ Install [git-secret][] and [create a gpg RSA key-pair][create-gpg-key].
 Send your `public-key.gpg` file to a developer and ask him to
 add you to this repository using git-secret.
 
+**Note:** if you are testing this project, or you want to use this project as a starting point, you can skip this step, but make sure to create the files: `env.app` and `env.db`. The content of this files might be as follows:
+
+#### `env.app`
+
+```
+DEBUG=1
+SECRET_KEY=<replace-with-django-secret-key>
+ALLOWED_HOSTS=localhost,127.0.0.1
+DATABASE_URL=postgres://user:user@db:5432/dentistry
+SQL_HOST=db
+SQL_PORT=5432
+DATABASE=postgres
+DJANGO_ALLOW_ASYNC_UNSAFE=True
+AWS_STORAGE_BUCKET_NAME=<replace-with-bucket-name>
+AWS_ACCESS_KEY_ID=<replace-with-aws-access-key>
+AWS_SECRET_ACCESS_KEY=<replace-with-aws-secret-access-key>
+AWS_S3_REGION_NAME=<replace-with-s3-regin>
+```
+
+#### `env.db`
+
+```
+POSTGRES_USER=user
+POSTGRES_PASSWORD=user
+POSTGRES_DB=dentistry
+```
+
 ### Cloning repository (depends on previous step)
 
 Once you have confirmed that you have been included in the repo using git-secret, clone this repo and navigate inside its root directory:
