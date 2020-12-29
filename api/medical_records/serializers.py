@@ -49,6 +49,7 @@ class PatientSerializer(serializers.ModelSerializer):
             "emergency_contact",
             "representative",
             "age",
+            "has_medical_history"
         ]
 
 
