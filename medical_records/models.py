@@ -84,6 +84,8 @@ class PeriodontalExam(TimeStampedModel):
     patient = models.OneToOneField(
         Patient,
         on_delete=models.CASCADE,
+        related_name="periodontal_exam",
+        related_query_name="periodontal_exam",
     )
     dental_plaque = models.BooleanField(default=False)
     calculus = models.BooleanField(default=False)

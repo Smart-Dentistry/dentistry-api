@@ -1,7 +1,7 @@
 from rest_framework import viewsets
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, action
 from rest_framework.response import Response
-from rest_framework.status import HTTP_400_BAD_REQUEST
+from rest_framework.status import HTTP_400_BAD_REQUEST, HTTP_201_CREATED
 from rest_framework import filters
 from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
@@ -17,6 +17,19 @@ class PatientViewSet(viewsets.ModelViewSet):
     serializer_class = PatientSerializer
     filter_backends = [filters.SearchFilter]
     search_fields = ['first_name', 'last_name', 'id_document_number']
+
+    @action(detail=True, methods=['post'])
+    def create_med_history(self, request, pk=None):
+        patient = self.get_object()
+        if hasattr(patient, 'medical_background'):
+            return Response(status=HTTP_400_BAD_REQUEST)
+        # if patient already has med history, return 400 response
+        # create MedicalBackground
+        # create PeriodontalExam
+        # create NonPathologicalBackground
+        # create ClinicalExam
+
+        return Response(status=HTTP_201_CREATED)
 
 
 @swagger_auto_schema(method="get", responses={200: ValueLabelSerializer(many=True)})
