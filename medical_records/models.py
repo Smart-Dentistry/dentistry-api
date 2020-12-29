@@ -100,6 +100,8 @@ class NonPathologicalBackground(TimeStampedModel):
     patient = models.OneToOneField(
         Patient,
         on_delete=models.CASCADE,
+        related_name="non_pathological_background",
+        related_query_name="non_pathological_background",
     )
 
     class BrushingFrequencyChoices(models.IntegerChoices):
