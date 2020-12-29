@@ -1,5 +1,7 @@
+from django.http.response import Http404
 from rest_framework import viewsets
 from rest_framework import response
+from rest_framework import status
 from rest_framework.decorators import api_view, action
 from rest_framework.response import Response
 from rest_framework.status import HTTP_400_BAD_REQUEST, HTTP_201_CREATED
@@ -52,6 +54,38 @@ class PatientViewSet(viewsets.ModelViewSet):
 
         return Response(status=HTTP_201_CREATED)
 
+    @action(detail=True, methods=['get'])
+    def get_med_history(self, request, pk=None):
+        patient = self.get_object()
+        if not patient.has_medical_history:
+            return Response(
+                { 'error': 'Patient does not have medical history'},
+                status=HTTP_400_BAD_REQUEST
+            )
+
+        data = {
+            "appointment_reason": patient.first_appointment_reason,
+            "family_history": patient.medical_background.family_history,
+            "personal_history": patient.medical_background.personal_history,
+            "general_practitioners": patient.medical_background.general_practitioners,
+            "clinical_exam": {
+                "extraoralExam": patient.clinical_exam.intraoral_exam,
+                "intraoralExam": patient.clinical_exam.extraoral_exam,
+            },
+            "periodontal_exam": {
+                "dental_plaque": patient.periodontal_exam.dental_plaque,
+                "calculus": patient.periodontal_exam.calculus,
+                "bleeding": patient.periodontal_exam.bleeding,
+                "tooth_mobility": patient.periodontal_exam.tooth_mobility,
+            },
+            "non_pathological_background": {
+                "mouthwash": patient.non_pathological_background.mouthwash,
+                "brushing_frequency": patient.non_pathological_background.brushing_frequency,
+                "floss": patient.non_pathological_background.floss,
+            }
+        }
+
+        return Response(data)
 
 @swagger_auto_schema(method="get", responses={200: ValueLabelSerializer(many=True)})
 @api_view()
