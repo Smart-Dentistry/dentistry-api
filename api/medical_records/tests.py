@@ -45,6 +45,7 @@ def test_patient_serializer_has_expected_fields(patient):
         "emergency_contact",
         "representative",
         "age",
+        "has_medical_history"
     }
 
 

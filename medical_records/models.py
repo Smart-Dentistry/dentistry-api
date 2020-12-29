@@ -61,6 +61,11 @@ class Patient(TimeStampedModel):
     emergency_contact = JSONField(blank=True, null=True)
     representative = JSONField(blank=True, null=True)
 
+    @property
+    def has_medical_history(self):
+        fields = ['medical_background', 'periodontal_exam', 'non_pathological_background', 'clinical_exam']
+        return all(hasattr(self, field) for field in fields)
+
     def __str__(self):
         return f'{self.first_name} {self.last_name}'
 
