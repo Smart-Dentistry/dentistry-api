@@ -189,3 +189,73 @@ def test_patient_med_record_is_not_created_when_patient_already_has_it(patient, 
     response = api_client.post(url, {},  format='json')
     
     assert response.status_code == HTTP_400_BAD_REQUEST
+
+
+@pytest.mark.django_db
+def test_400_response_when_patient_has_no_medical_history(patient, api_client):
+    """Test that 400 status code is returned when patient has no medical history"""
+    url = reverse('patient-get-med-history', kwargs={"pk": patient.pk})
+    response = api_client.get(url)
+
+    assert response.status_code == HTTP_400_BAD_REQUEST
+
+
+@pytest.mark.django_db
+def test_200_and_med_history_when_patient_has_medical_history(patient, api_client):
+    """Test that 200 status code and medical history JSON is returned when patient
+    has medical history"""
+    url = reverse('patient-create-med-history', kwargs={"pk": patient.pk})
+    data = {
+        "appointmentReason": "This is silly",
+        "familyHistory": {
+            "diseases": [
+                {
+                    "id": 12,
+                    "label": "Drinker",
+                    "relatives": ["M", "F", "S"]
+            }
+        ],
+        "observations": "This is a good guy."
+        },
+        "personalHistory": {
+            "diseases": [1, 5],
+            "observations": "This doesn't look good."
+        },
+        "generalPractitioners": [
+            {
+                "name": "Luis M Vargas",
+                "phone": "+13053991321",
+                "specialization": "Scientist",
+                "observations": "This is a great guy."
+            }
+        ],
+        "clinicalExam": {
+            "extraoralExam": "ABCD",
+            "intraoralExam": "XYZ"
+        },
+        "periodontalExam": {
+            "dentalPlaque": True,
+            "calculus": False,
+            "bleeding": True,
+            "toothMobility": False
+        },
+        "nonPathologicalBackground": {
+            "mouthwash": True,
+            "floss": True,
+            "brushingFrequency": 3
+        }
+    }
+    api_client.post(url, data,  format='json')
+    url = reverse('patient-get-med-history', kwargs={"pk": patient.pk})
+    response = api_client.get(url)
+    patient.refresh_from_db()
+    data = response.data
+
+    assert response.status_code == HTTP_200_OK
+    assert 'appointment_reason' in data
+    assert 'family_history' in data
+    assert 'personal_history' in data
+    assert 'general_practitioners' in data
+    assert 'clinical_exam' in data
+    assert 'periodontal_exam' in data
+    assert 'non_pathological_background' in data
