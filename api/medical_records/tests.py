@@ -10,10 +10,6 @@ from medical_records.models import PeriodontalExam
 from core.factories import MalePatientFactory
 from .serializers import PatientSerializer, ValueLabelSerializer
 
-@pytest.fixture
-def patient():
-    return MalePatientFactory()
-
 
 
 @pytest.mark.django_db
