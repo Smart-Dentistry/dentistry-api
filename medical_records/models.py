@@ -1,7 +1,5 @@
 from django.db import models
-from django.contrib.postgres.fields import JSONField
 from django_extensions.db.models import TimeStampedModel
-
 from phonenumber_field.modelfields import PhoneNumberField
 
 
@@ -43,7 +41,7 @@ class Patient(TimeStampedModel):
         choices=CountryOfResidence.choices,
         default=CountryOfResidence.ECUADOR,
     )
-    address = JSONField(blank=True, null=True)
+    address = models.JSONField(blank=True, null=True)
     phone = PhoneNumberField()
     whatsapp = models.BooleanField(default=False)
     health_insurance_company = models.CharField(max_length=50, blank=True)
@@ -58,8 +56,8 @@ class Patient(TimeStampedModel):
     referral_source = models.CharField(
         max_length=1, choices=ReferralSourceChoices.choices
     )
-    emergency_contact = JSONField(blank=True, null=True)
-    representative = JSONField(blank=True, null=True)
+    emergency_contact = models.JSONField(blank=True, null=True)
+    representative = models.JSONField(blank=True, null=True)
 
     @property
     def has_medical_history(self):
@@ -77,9 +75,9 @@ class MedicalBackground(TimeStampedModel):
         related_name="medical_background",
         related_query_name="medical_background",
     )
-    family_history = JSONField(blank=True, null=True)
-    personal_history = JSONField(blank=True, null=True)
-    general_practitioners = JSONField(blank=True, null=True)
+    family_history = models.JSONField(blank=True, null=True)
+    personal_history = models.JSONField(blank=True, null=True)
+    general_practitioners = models.JSONField(blank=True, null=True)
 
     def __str__(self):
         return str(self.patient)
